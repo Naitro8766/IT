@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>مختبر الهاكر الأخلاقي - ركن IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#3dff86;--dim:#7fc79a;--bg:#030a06;--am:#ffc247;--r:#ff5470;--line:#143d24}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg) repeating-linear-gradient(#0000 0 2px,#00ff6a07 2px 3px);color:var(--g);font-family:Cairo,Tahoma,sans-serif;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:#04110a}
+.brand{font-weight:800;font-size:15px;line-height:1.3}.brand small{display:block;font-weight:400;font-size:10px;color:var(--dim)}
+.stats{display:flex;gap:10px;align-items:center;font-size:13px;direction:ltr;white-space:nowrap}
+.stats b{color:#fff}.low{color:var(--r)!important}
+.ic{background:none;border:1px solid var(--line);color:var(--g);border-radius:8px;padding:3px 8px;font:inherit;font-size:13px;cursor:pointer}
+#main{flex:1;overflow-y:auto;padding:14px;max-width:720px;width:100%;margin:0 auto}
+.ln{font-size:14px;line-height:1.9;margin:2px 0;unicode-bidi:plaintext}
+.hi{color:#fff;font-weight:700}.mut{color:var(--dim)}.bad{color:var(--r)}.good{color:var(--g);font-weight:700}.tip{color:var(--am)}
+.code{direction:ltr;text-align:left;background:#06190f;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font:700 20px 'Courier New',monospace;letter-spacing:2px;color:#fff;margin:6px 0}
+#panel{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.in{width:100%;background:#020805;border:1px solid var(--g);color:#fff;border-radius:8px;padding:11px 12px;font:16px 'Courier New',monospace;direction:ltr}
+.in:focus,.b:focus-visible{outline:2px solid var(--am);outline-offset:2px}
+.b{background:var(--g);color:#02150a;border:0;border-radius:8px;padding:11px 16px;font:800 15px Cairo,sans-serif;cursor:pointer}
+.b.alt{background:none;color:var(--g);border:1px solid var(--g)}
+.b.hint{background:none;color:var(--am);border:1px dashed var(--am);font-weight:700}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}
+.opt{text-align:left;direction:ltr;font-family:'Courier New',monospace}
+.mail{border:1px solid var(--line);border-radius:10px;background:#06190f;padding:6px}
+.tk{display:block;width:100%;text-align:start;background:none;border:0;border-bottom:1px solid var(--line);color:#d8ffe6;font:inherit;font-size:14px;line-height:1.7;padding:10px 8px;cursor:pointer}
+.tk:last-child{border:0}.tk.on{background:#3a0f18;color:#ffb3c0}
+.sh{background:#020805;border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:90px;max-height:170px;overflow-y:auto;direction:ltr;text-align:left;font:13px/1.6 'Courier New',monospace;color:#cfeedd;white-space:pre-wrap}
+canvas{width:100%;border-radius:8px;border:1px solid var(--line)}
+.grid2{display:grid;grid-template-columns:1fr 1.4fr;gap:8px}.col{display:flex;flex-direction:column;gap:8px}.col .b{font-size:14px}.b.on{background:var(--am);color:#02150a;border-color:var(--am)}.shake{animation:sh .3s}@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media(prefers-reduced-motion:reduce){.shake{animation:none}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">كلية الحاسوب - ركن IT<small>مختبر الهاكر الأخلاقي</small></div>
+ <div class="stats"><span>★ <b id="sc">0</b></span><span><b id="mn">0/5</b></span>
+ <button class="ic" id="bd" aria-label="لوحة الترتيب">🏆</button><button class="ic" id="sd" aria-label="الصوت">🔊</button></div>
+</header>
+<div id="main"><div id="log"></div><div id="panel"></div></div>
+
+<script>
+const $=s=>document.querySelector(s),log=$('#log'),panel=$('#panel'),main=$('#main');
+let snd=true,AC,name='ضيف',idx=0,score=0,wrong=0,hint=0,ms=0,live=false,t0=0,total=0;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms)),fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+const down=()=>main.scrollTop=main.scrollHeight;
+function beep(f,d=.08,t='square',v=.04){if(!snd)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=t;o.frequency.value=f;g.gain.value=v;o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
+const sOk=()=>{beep(660,.1);setTimeout(()=>beep(990,.16),110)},sNo=()=>beep(150,.25,'sawtooth');
+$('#sd').onclick=()=>{snd=!snd;$('#sd').textContent=snd?'🔊':'🔇'};
+function line(h,c=''){const d=document.createElement('div');d.className='ln '+c;d.innerHTML=h;log.appendChild(d);down();return d}
+function txt(s,c=''){const d=line('',c);d.textContent=s;return d}
+async function type(s,c=''){const d=line('',c);for(let i=0;i<s.length;i++){d.textContent+=s[i];if(i%3==0)beep(1100+Math.random()*400,.02,'square',.012);await sleep(16)}down()}
+function setPanel(h){panel.innerHTML=h;down()}
+
+/* ---- التخزين المحلي: لوحة الترتيب على هذا الجهاز فقط ---- */
+const getB=()=>{try{return JSON.parse(localStorage.getItem('itcorner-board')||'[]')}catch(e){return[]}};
+const putB=e=>{try{const b=getB();b.push(e);b.sort((a,c)=>c.s-a.s||a.t-c.t);localStorage.setItem('itcorner-board',JSON.stringify(b.slice(0,5)))}catch(e){}};
+$('#bd').onclick=()=>{const b=getB();line('─── لوحة الترتيب (على هذا الجهاز) ───','hi');if(!b.length)line('لا توجد نتائج بعد. كن الأول!','mut');b.forEach((e,i)=>txt(`${i+1}. ${e.n} — ${e.s} نقطة — ${fmt(e.t)}`,'mut'))};
+
+/* ---- أدوات بناء المهام ---- */
+function form(p,ph,check,win,bad){p.insertAdjacentHTML('beforeend',`<input class="in" placeholder="${ph}" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="b">إرسال</button>`);
+ const i=p.querySelector('input'),b=p.querySelector('.b'),go=()=>check(i.value.trim())?win():(i.classList.add('shake'),setTimeout(()=>i.classList.remove('shake'),300),bad('إجابة غير صحيحة، جرّب مرة أخرى'));
+ b.onclick=go;i.onkeydown=e=>e.key==='Enter'&&go();i.focus()}
+
+const M=[
+{t:'فك الشفرة (Cipher)',time:60,
+ b:'وصلتك رسالة مشفّرة بطريقة قيصر. كل حرف تحرّك 3 أماكن للأمام في الأبجدية. ما الكلمة الأصلية؟',code:'KDFNHU',
+ h:'ارجع كل حرف 3 أماكن للخلف: K ترجع إلى H.',a:'HACKER',
+ l:'هذا أساس التشفير (Encryption): تحويل الكلام إلى رموز لا يفهمها إلا من يملك المفتاح.',
+ r:(p,w,x)=>form(p,'اكتب الكلمة بالإنجليزي',v=>v.toUpperCase()==='HACKER',w,x)},
+{t:'كلمة السر الضعيفة',time:45,
+ b:'أي كلمة سر من هذه يخمّنها المخترق أولاً؟',h:'ابحث عن الكلمة الأكثر استخداماً بين الناس.',a:'123456',
+ l:'المخترق يجرّب الكلمات الشائعة أولاً. الأفضل جملة طويلة غير متوقعة، مثل blue-train-lamp-ocean.',
+ r:(p,w,x)=>{['Zk#9mQ!x2Lp','123456','blue-train-lamp-ocean','Ahmed@2005'].sort(()=>Math.random()-.5).forEach(o=>{const b=document.createElement('button');b.className='b alt opt';b.textContent=o;b.onclick=()=>o==='123456'?w():x('هذه ليست الأسهل تخميناً');p.appendChild(b)})}},
+{t:'اكتشف التصيّد (Phishing)',time:75,
+ b:'وصلتك هذه الرسالة من "البنك". اضغط على 3 عناصر مشبوهة فيها.',h:'انظر إلى عنوان المرسل، والاستعجال، والرابط.',a:'المرسل المزيّف، والاستعجال، والرابط الغريب',
+ l:'الاستعجال والرابط الغريب والمرسل المزيّف هي علامات التصيّد. لا تضغط على روابط لا تثق بها.',
+ r:(p,w,x)=>{const T=[['من: support@bank-secure-login.xyz',1],['عاجل!! حسابك سيُغلق خلال ساعة',1],['شكراً لاستخدامك خدماتنا',0],['اضغط هنا: http://bank-verify.top/login',1],['رقم المرجع: 48213',0]];let n=0;
+  const m=document.createElement('div');m.className='mail';T.forEach(([s,v])=>{const b=document.createElement('button');b.className='tk';b.textContent=s;b.onclick=()=>{if(b.classList.contains('on'))return;if(v){b.classList.add('on');beep(800,.06);++n===3&&w()}else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),300);x('هذا العنصر عادي')}};m.appendChild(b)});p.appendChild(m)}},
+{t:'وصّل المصطلح بمعناه',time:60,
+ b:'اضغط على مصطلح، ثم اضغط على معناه الصحيح. وصّل المصطلحات الأربعة كلها.',h:'CPU هو عقل الجهاز، وRAM ذاكرة مؤقتة، وBrowser نفتح به المواقع، وWi-Fi اتصال لاسلكي.',a:'CPU = عقل الجهاز، RAM = الذاكرة المؤقتة، Browser = متصفح المواقع، Wi-Fi = اتصال لاسلكي',
+ l:'العقل (CPU) والذاكرة (RAM) والمتصفح والشبكة هي أساسيات الجهاز، ومواد التخصص كلها تبنى عليها.',
+ r:(p,w,x)=>{const P=[['CPU','عقل الجهاز، ينفّذ الأوامر'],['RAM','الذاكرة المؤقتة للبرامج المفتوحة'],['Browser','البرنامج الذي تفتح به المواقع، مثل Chrome'],['Wi-Fi','اتصال لاسلكي بالإنترنت']];let sel=null,n=0;
+  const g=document.createElement('div');g.className='grid2';const L=document.createElement('div'),R=document.createElement('div');L.className=R.className='col';
+  P.forEach(([t])=>{const b=document.createElement('button');b.className='b alt opt';b.textContent=t;b.onclick=()=>{if(b.disabled)return;L.querySelectorAll('.on').forEach(e=>e.classList.remove('on'));b.classList.add('on');sel=b;beep(700,.05)};L.appendChild(b)});
+  P.slice().sort(()=>Math.random()-.5).forEach(([t,m])=>{const b=document.createElement('button');b.className='b alt';b.textContent=m;b.onclick=()=>{if(b.disabled)return;if(!sel){txt('اختر المصطلح أولاً','tip');return}
+   if(sel.textContent===t){sel.disabled=b.disabled=true;sel.classList.remove('on');sel.style.opacity=b.style.opacity='.35';sel=null;beep(900,.08);++n===4&&w()}else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),300);sel.classList.remove('on');sel=null;x('هذا ليس المعنى الصحيح')}};R.appendChild(b)});
+  g.append(L,R);p.appendChild(g)}},
+{t:'الإعدادات الافتراضية',time:60,
+ b:'جهاز الشبكة في الشركة ما زال بإعدادات المصنع (Default). جرّب أشهر اسم مستخدم وكلمة سر افتراضية.',h:'اسم المستخدم admin، وكلمة السر غالباً نفس الكلمة.',a:'admin / admin',
+ l:'غيّر دائماً الإعدادات الافتراضية، وفعّل التحقق بخطوتين (2FA).',
+ r:(p,w,x)=>{p.insertAdjacentHTML('beforeend','<input class="in" id="u" placeholder="Username" autocomplete="off" autocapitalize="off"><input class="in" id="k" placeholder="Password" autocomplete="off" autocapitalize="off"><button class="b">دخول</button>');
+  const go=()=>{const u=p.querySelector('#u').value.trim().toLowerCase(),k=p.querySelector('#k').value.trim().toLowerCase();u==='admin'&&['admin','1234','12345','123456','password'].includes(k)?w():x('تم رفض الدخول')};
+  p.querySelector('.b').onclick=go;p.querySelector('#k').onkeydown=e=>e.key==='Enter'&&go()}}
+];
+
+/* ---- سير اللعبة ---- */
+async function boot(){
+ await type('> تهيئة مختبر الأمن السيبراني...','mut');await type('> كلية الحاسوب - ركن IT','hi');
+ await type('> أمامك 5 مهام. خذ وقتك براحة، فلا يوجد حد زمني. السرعة تعطي نقاطاً إضافية فقط.');await type('> ما اسمك أيها الهاكر؟');
+ setPanel('<input class="in" id="nm" maxlength="24" placeholder="اكتب اسمك" autocomplete="off"><button class="b" id="go">ابدأ المهمة الأولى</button>');
+ const go=()=>{name=$('#nm').value.trim()||'ضيف';t0=Date.now();mission(0)};$('#go').onclick=go;$('#nm').onkeydown=e=>e.key==='Enter'&&go()}
+
+async function mission(i){
+ idx=i;wrong=0;hint=0;live=false;const m=M[i];$('#mn').textContent=`${i+1}/5`;setPanel('');
+ await type(`> المهمة ${i+1}: ${m.t}`,'hi');line(m.b);if(m.code)line(m.code,'code');
+ ms=Date.now();live=true;
+ const h=document.createElement('button');h.className='b hint';h.textContent='💡 تلميح (−30 نقطة)';h.onclick=()=>{if(hint)return;hint=1;txt('تلميح: '+m.h,'tip');h.remove();const k=document.createElement('button');k.className='b alt';k.textContent='تخطّي وأظهر الإجابة';k.onclick=()=>finish(false);panel.appendChild(k)};
+ const box=document.createElement('div');box.style.cssText='display:flex;flex-direction:column;gap:10px';panel.append(box,h);
+ m.r(box,()=>live&&finish(true),msg=>{if(!live)return;wrong++;sNo();txt(msg,'bad')})}
+async function finish(win){
+ if(!live)return;live=false;const m=M[idx];let pts=0;
+ if(win){pts=Math.max(20,100-10*wrong-30*hint)+Math.floor(Math.max(0,60-(Date.now()-ms)/1000)/2);score+=pts;sOk();$('#sc').textContent=score;txt(`✔ أحسنت! +${pts} نقطة`,'good')}
+ else{sNo();txt('⏭ تم تخطي المهمة. الإجابة: '+m.a,'bad')}
+ await type('> '+m.l,'mut');
+ setPanel(`<button class="b" id="nx">${idx<4?'المهمة التالية':'عرض النتيجة والشهادة'}</button>`);$('#nx').onclick=()=>idx<4?mission(idx+1):end()}
+
+async function end(){
+ total=Math.round((Date.now()-t0)/1000);putB({n:name,s:score,t:total});setPanel('');
+ const rank=score>=450?'خبير أمن':score>=300?'محترف':'هاكر واعد';
+ await type(`> اكتملت المهام. ${name}، نقاطك ${score} والزمن ${fmt(total)} (${rank}).`,'hi');
+ await type('> الهاكر الأخلاقي يستخدم مهاراته لحماية الناس لا لإيذائهم.');
+ await document.fonts.ready;const c=cert();panel.appendChild(c);
+ const r=document.createElement('div');r.className='row';
+ r.innerHTML='<button class="b" id="dl">حفظ الشهادة</button><button class="b alt" id="ag">العب مجدداً</button>';panel.appendChild(r);
+ line('أرِ الشهادة لفريق الركن لتستلم جائزتك 🎁','tip');
+ $('#dl').onclick=()=>c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='شهادة-ركن-IT.png';a.click()});
+ $('#ag').onclick=()=>location.reload()}
+
+function cert(){
+ const c=document.createElement('canvas');c.width=1200;c.height=850;const x=c.getContext('2d');
+ x.fillStyle='#fff';x.fillRect(0,0,1200,850);x.strokeStyle='#0B2A5B';x.lineWidth=14;x.strokeRect(30,30,1140,790);x.strokeStyle='#1E88E5';x.lineWidth=3;x.strokeRect(54,54,1092,742);
+ x.direction='rtl';x.textAlign='center';
+ const T=(s,y,sz,col,w='700')=>{x.font=`${w} ${sz}px Cairo,Tahoma,sans-serif`;x.fillStyle=col;x.fillText(s,600,y)};
+ T('كلية الحاسوب - ركن IT',150,42,'#1E88E5');T('شهادة هاكر أخلاقي مبتدئ',255,80,'#0B2A5B','800');
+ T('تُمنح هذه الشهادة إلى',345,36,'#444','400');T(name,455,86,'#0B2A5B','800');
+ T('لإتمامه مهام مختبر الأمن السيبراني الخمس',545,36,'#444','400');
+ T(`النقاط: ${score}   |   الزمن: ${fmt(total)}`,625,40,'#1E88E5');
+ T('الهاكر الأخلاقي يستخدم مهاراته لحماية الناس لا لإيذائهم',725,30,'#0B2A5B','400');
+ T(new Date().toLocaleDateString('ar'),780,26,'#777','400');return c}
+boot();
+</script>
+</body>
+</html>
