@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>عالم لغات البرمجة - ركن IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;overflow:hidden;background:#02040a;color:#fff;font-family:Cairo,Tahoma,sans-serif;touch-action:none;-webkit-user-select:none;user-select:none}
+#space{position:fixed;inset:0}canvas{display:block}
+.top{position:fixed;top:0;left:0;right:0;z-index:5;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 26px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;background:linear-gradient(#000c,transparent);pointer-events:none}
+.brand{font-weight:800;font-size:15px;line-height:1.3}.brand small{display:block;font-weight:600;font-size:11px;color:#7fd6ff}
+.tr{display:flex;gap:6px;pointer-events:auto}
+.pill{border:1px solid #ffffff30;background:#0a1424cc;color:#fff;border-radius:18px;padding:5px 11px;font:700 12px Cairo,sans-serif;white-space:nowrap}
+.pill.on{border-color:#ffc247;color:#ffc247}
+.hint{position:fixed;z-index:4;top:calc(64px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);padding:4px 14px;border-radius:20px;background:#080e1b99;color:#b4c6d8;font-size:11px;white-space:nowrap;pointer-events:none;transition:opacity 1s}
+.lbl{position:fixed;z-index:3;left:0;top:0;font-size:12px;font-weight:700;color:#e6f3ff;text-shadow:0 0 6px #000,0 0 3px #000;pointer-events:none;white-space:nowrap;will-change:transform}
+#sheet{position:fixed;left:8px;right:8px;bottom:calc(58px + env(safe-area-inset-bottom,0px));max-height:46vh;overflow-y:auto;z-index:6;padding:12px 14px 14px;border-radius:16px;background:#060d1ae6;border:1px solid var(--c,#6fb7ff)55;backdrop-filter:blur(12px);transform:translateY(24px);opacity:0;pointer-events:none;transition:.3s;touch-action:pan-y;max-width:640px;margin:0 auto;-webkit-user-select:text;user-select:text}
+#sheet.on{transform:none;opacity:1;pointer-events:auto}
+#sheet h2{margin:0;font-size:20px}#sheet .en{direction:ltr;display:block;color:var(--c,#7fd6ff);font-size:12px;font-weight:700}
+#sheet .tg{margin:6px 0 2px;color:#c9d7e6;font-size:13px}
+#sheet h4{margin:12px 0 4px;color:var(--c,#7fd6ff);font-size:13px}
+#sheet p{margin:2px 0;font-size:13.5px;line-height:1.85;color:#e2ebf5}
+#sheet ul{margin:2px 0;padding:0 18px 0 0}#sheet li{font-size:13.5px;line-height:1.8;color:#e2ebf5}
+pre{direction:ltr;text-align:left;background:#020611;border:1px solid #ffffff1f;border-radius:10px;padding:10px 12px;margin:4px 0;overflow-x:auto;font:13px/1.6 'Courier New',monospace;color:#9dffcb}
+.stars{color:#ffc247;letter-spacing:2px;font-size:15px}
+.fact{margin-top:12px;padding:8px 10px;border-radius:10px;background:#ffffff0f;font-size:13px;line-height:1.7;color:#ffe9b0}
+.tabs{display:flex;gap:6px;margin-bottom:8px}.tb{flex:1;border:1px solid #ffffff30;background:none;color:#fff;border-radius:10px;padding:6px;font:700 13px Cairo,sans-serif}.tb.a{background:#ffffff1f;border-color:#ffc247;color:#ffc247}
+.qa{margin:6px 0;padding:8px 10px;border-radius:10px;background:#ffffff0f}.qa b{display:block;color:#ffc247;font-size:13px;margin-bottom:2px}
+#chips{position:fixed;left:0;right:0;bottom:0;z-index:7;display:flex;gap:6px;overflow-x:auto;padding:14px 10px calc(8px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,#02040af2 45%);scrollbar-width:none;touch-action:pan-x}
+#chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:flex;align-items:center;gap:6px;border:1px solid #ffffff30;background:#0a1424e0;color:#fff;border-radius:20px;padding:7px 13px;font:600 13px Cairo,sans-serif;cursor:pointer}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--c,#fff)}
+.chip.on{border-color:var(--c,#fff);background:#ffffff1f}.chip.seen:after{content:'✓';color:#7dffb0;font-size:11px}
+#toast{position:fixed;z-index:9;left:50%;top:50%;transform:translate(-50%,-50%) scale(.9);width:min(86vw,340px);padding:18px;border-radius:18px;text-align:center;background:#071a12f2;border:1px solid #7dffb0;color:#eafff3;font-size:15px;line-height:1.8;opacity:0;pointer-events:none;transition:.4s}
+#toast.on{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto}
+#toast b{display:block;font-size:20px;margin-bottom:4px}
+#welcome{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%,#0b2a5b 0%,#050c19 60%,#02040a 100%);transition:opacity .7s,visibility .7s}
+#welcome.out{opacity:0;visibility:hidden;pointer-events:none}
+#welcome .col{font-size:15px;font-weight:600;color:#a6c8e8}
+#welcome .it{direction:ltr;font-size:60px;font-weight:800;line-height:1;text-shadow:0 0 28px #55caffaa,0 0 60px #2a80ff66}#welcome .it b{color:#58d5ff}
+#welcome .ln{width:70px;height:2px;background:linear-gradient(90deg,transparent,#55caff,transparent)}
+#welcome .ti{font-size:22px;font-weight:800;color:#bfeaff}#welcome .by{font-size:12px;color:#8fb0cc}
+#welcome .bt{direction:ltr;padding:4px 16px;border:1px solid #55caff88;border-radius:20px;background:#0a2a4a99;color:#bfeaff;font-size:16px;font-weight:800;letter-spacing:2px}
+#welcome .hi{font-size:20px;font-weight:800}
+#welcome button{margin-top:6px;padding:11px 26px;border:1px solid #5bcaff;border-radius:26px;background:#28a0dc55;color:#fff;font:700 15px Cairo,sans-serif;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="welcome"><div class="col">كلية الحاسوب</div><div class="it">ركن IT<b>.</b></div><div class="ln"></div><div class="ti">عالم لغات البرمجة</div><div class="by">تعديل وتجهيز</div><div class="bt">Batch 33</div><div class="hi">مرحباً بكم في بيتكم 💻</div><button id="go">ابدأ الاستكشاف 🚀</button></div>
+<div id="space"></div>
+<header class="top"><div class="brand">كلية الحاسوب - ركن IT<small>عالم لغات البرمجة</small></div><div class="tr"><span class="pill" id="cnt">0/0</span><button class="pill" id="sp">👤 مشرف</button></div></header>
+<div class="hint" id="hint">اسحب للدوران • اضغط على أي كوكب • أو اختر من الأسفل</div>
+<div id="sheet"></div>
+<div id="chips"></div>
+<div id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const D=[{"n": "C++", "ar": "سي بلس بلس", "lb": "C++", "col": "#5b8cff", "tag": "قوة وسرعة", "d": "لغة قوية وسريعة تعطيك تحكماً كبيراً في الجهاز، وتُدرَّس عادة لتفهم أساسيات البرمجة بعمق.", "sec": [["تُستخدم في", ["الألعاب", "البرامج الكبيرة والأنظمة", "المسابقات البرمجية"]], ["مثال واقعي", "محركات الألعاب الكبيرة تعتمد على C++ بسبب سرعتها."], ["كود بسيط", {"code": "#include <iostream>\nusing namespace std;\nint main() {\n  cout << \"Hello!\";\n  return 0;\n}"}]], "diff": 4, "fact": "C++ تطورت من لغة C بإضافة البرمجة كائنية التوجه (OOP).", "an": "سيارة سباق: سريعة وقوية، لكنها تحتاج سائقاً متمرساً.", "qa": [["هل C++ صعبة للبداية؟", "أصعب من بايثون، لكنها تعلّمك فهماً عميقاً يسهّل عليك تعلم بقية اللغات."], ["لماذا تُدرَّس مع أن غيرها أسهل؟", "لأنها تعلّمك كيف يعمل الحاسوب من الداخل، وهذا أساس متين."]], "pos": null}, {"n": "Python", "ar": "بايثون", "lb": "Python", "col": "#ffd43b", "tag": "سهلة وقوية", "d": "لغة بسيطة وقريبة من الإنجليزية، من أسهل اللغات للمبتدئين، وتُستخدم في الذكاء الاصطناعي وتحليل البيانات والأتمتة.", "sec": [["تُستخدم في", ["الذكاء الاصطناعي", "تحليل البيانات", "أتمتة المهام والأمن السيبراني"]], ["مثال واقعي", "سكربت صغير يرتّب آلاف الملفات في ثوانٍ."], ["كود بسيط", {"code": "print(\"Hello!\")\nfor i in range(3):\n    print(i)"}]], "diff": 1, "fact": "اسمها مأخوذ من فرقة الكوميديا \"مونتي بايثون\" وليس من الثعبان.", "an": "دراجة سهلة: تبدأ بها بسرعة وتوصلك لأماكن كثيرة.", "qa": [["هل أبدأ ببايثون؟", "نعم، وهي اختيار ممتاز كأول لغة."], ["هل بايثون أضعف لأنها سهلة؟", "لا، تُستخدم في شركات كبرى وفي الذكاء الاصطناعي. سهولتها ميزة."]], "pos": null}, {"n": "Java", "ar": "جافا", "lb": "Java", "col": "#ff7043", "tag": "تعمل على أجهزة كثيرة", "d": "لغة منظمة وموثوقة تعمل على أنظمة مختلفة بنفس الكود، وتُستخدم في الشركات الكبيرة وتطبيقات أندرويد.", "sec": [["تُستخدم في", ["أنظمة الشركات والبنوك", "تطبيقات أندرويد", "الخوادم"]], ["مثال واقعي", "كثير من أنظمة الشركات الكبيرة والبنوك تعتمد على Java."], ["كود بسيط", {"code": "public class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello!\");\n  }\n}"}]], "diff": 3, "fact": "شعارها المعروف: \"اكتب مرة وشغّل في كل مكان\".", "an": "حافلة منتظمة: تلتزم بقواعد واضحة وتصل بأمان.", "qa": [["ما الفرق بين Java وJavaScript؟", "لغتان مختلفتان تماماً والتشابه في الاسم فقط. Java للأنظمة والتطبيقات، وJavaScript لصفحات الويب."]], "pos": null}, {"n": "JavaScript", "ar": "جافاسكربت", "lb": "JavaScript", "col": "#39e6a0", "tag": "لغة الويب", "d": "اللغة التي تجعل صفحات الويب تتفاعل: أزرار وقوائم وألعاب، وتعمل في أي متصفح، وتُستخدم كذلك على الخوادم.", "sec": [["تُستخدم في", ["المواقع التفاعلية", "تطبيقات الويب", "ألعاب المتصفح"]], ["مثال واقعي", "الأزرار والقوائم المتحركة في أي موقع حديث."], ["كود بسيط", {"code": "alert(\"Hello!\");\nfor (let i = 0; i < 3; i++) {\n  console.log(i);\n}"}]], "diff": 2, "fact": "كتبها برندان آيك في نحو عشرة أيام عام 1995.", "an": "الكهرباء في البيت: تعطي الحياة والحركة للصفحة الجامدة.", "qa": [["هل أحتاج HTML قبلها؟", "نعم، تبدأ بـ HTML وCSS للشكل ثم JavaScript للتفاعل."]], "pos": null}, {"n": "C#", "ar": "سي شارب", "lb": "C#", "col": "#a56cff", "tag": "ألعاب وتطبيقات", "d": "لغة حديثة من مايكروسوفت، منظمة وسهلة القراءة، وتُستخدم في الألعاب (Unity) وتطبيقات سطح المكتب والخوادم.", "sec": [["تُستخدم في", ["ألعاب Unity", "تطبيقات ويندوز", "أنظمة الشركات"]], ["مثال واقعي", "كثير من ألعاب الموبايل مبنية بمحرك Unity الذي يستخدم C#."], ["كود بسيط", {"code": "using System;\nclass Program {\n  static void Main() {\n    Console.WriteLine(\"Hello!\");\n  }\n}"}]], "diff": 3, "fact": "ينطق اسمها \"سي شارب\"، والشارب رمز في الموسيقى.", "an": "سيارة عائلية مريحة ومتكاملة: كل ما تحتاجه موجود فيها.", "qa": [["هل C# قريبة من Java؟", "نعم، متشابهتان كثيراً، ومن تعلّم إحداهما يتعلم الأخرى بسرعة."]], "pos": null}, {"n": "PHP", "ar": "بي إتش بي", "lb": "PHP", "col": "#8892bf", "tag": "لغة الخوادم", "d": "لغة تعمل على الخادم وتبني مواقع تتعامل مع قواعد البيانات، وتعتمد عليها مواقع كثيرة منها WordPress.", "sec": [["تُستخدم في", ["مواقع وأنظمة ويب", "متاجر إلكترونية", "مواقع WordPress"]], ["مثال واقعي", "كثير من مواقع الأخبار والمتاجر تعمل بـ PHP."], ["كود بسيط", {"code": "<?php\n  echo \"Hello!\";\n  $x = 5;\n?>"}]], "diff": 2, "fact": "نسبة كبيرة من مواقع الإنترنت تعمل على WordPress المكتوب بـ PHP.", "an": "الطباخ في مطبخ المطعم: يجهّز ما يراه الزبون دون أن يظهر.", "qa": [["هل PHP قديمة؟", "قديمة لكنها مستمرة ومتطورة، وتُستخدم في ملايين المواقع."]], "pos": null}, {"n": "SQL", "ar": "إس كيو إل", "lb": "SQL", "col": "#ff5ea8", "tag": "لغة البيانات", "d": "ليست لغة برمجة كاملة، بل لغة تخاطب بها قواعد البيانات لتطلب منها معلومات أو تعدّلها.", "sec": [["تُستخدم في", ["قواعد البيانات", "تحليل البيانات", "أي نظام فيه معلومات مخزّنة"]], ["مثال واقعي", "تسأل: \"أعطني كل طلاب الدفعة 33\" فتعيدهم قاعدة البيانات فوراً."], ["كود بسيط", {"code": "SELECT name FROM students\nWHERE batch = 33;"}]], "diff": 2, "fact": "قراءتها قريبة من الإنجليزية: SELECT تعني \"اختر\".", "an": "أمين مكتبة تطلب منه كتاباً بالاسم فيحضره.", "qa": [["هل SQL لغة برمجة؟", "تُسمّى لغة استعلام. وتُدرَّس مع البرمجة لأنها أساسية لكل مبرمج."]], "pos": null}, {"n": "Kotlin", "ar": "كوتلن", "lb": "Kotlin", "col": "#00bcd4", "tag": "تطبيقات أندرويد الحديثة", "d": "لغة حديثة مختصرة وآمنة، من أشهر لغات تطبيقات أندرويد، وتتشابه مع Java.", "sec": [["تُستخدم في", ["تطبيقات أندرويد", "الخوادم", "تطبيقات تعمل على أكثر من منصة"]], ["مثال واقعي", "كثير من تطبيقات أندرويد الحديثة تُكتب بـ Kotlin."], ["كود بسيط", {"code": "fun main() {\n  println(\"Hello!\")\n  val x = 5\n}"}]], "diff": 2, "fact": "طورتها شركة JetBrains، وأعلنت Google دعمها لأندرويد عام 2017.", "an": "نسخة مختصرة ومطورة من طريق مألوف: تصل أسرع بأخطاء أقل.", "qa": [["أبدأ بـ Kotlin أم Java؟", "Kotlin أبسط للمبتدئ، وJava مفيدة لتفهم الأساس."]], "pos": null}],META={"title": "عالم لغات البرمجة", "core": "#3ddc97", "coreLabel": "{ code }", "l1": "ما هي؟", "l2": "مستوى الصعوبة للمبتدئ", "sup": ["لا توجد لغة أفضل من كل اللغات، فلكل لغة غرضها. المهم أن يتقن لغة واحدة أولاً.", "بعد أن يتعلم لغة واحدة جيداً، تصبح بقية اللغات أسهل بكثير لأن الأفكار متشابهة.", "للبداية ينصح كثيرون ببايثون لسهولتها، أو بالتي تدرّسها الكلية. وجّهه حسب ما يريد أن يبني.", "الأكواد المعروضة بسيطة تطبع كلمة Hello، وتكفي ليرى الفرق في الشكل بين اللغات.", "اسأل الطالب: ماذا تريد أن تبني؟ لعبة؟ موقعاً؟ تطبيقاً؟ ثم دلّه على اللغة المناسبة."], "done": "<b>🏅 أحسنت!</b>اطلعت على كل اللغات. أخبر فريق الركن أي لغة تريد أن تبدأ بها."};
+const $=s=>document.querySelector(s),TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+if(!window.THREE){document.body.innerHTML='<p style="padding:30px">تعذر تحميل المحرك. تحقق من الإنترنت.</p>';throw 0}
+$('#go').onclick=()=>{$('#welcome').classList.add('out');setTimeout(()=>$('#welcome').remove(),800)};
+
+/* ---- المشهد ---- */
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.outputEncoding=THREE.sRGBEncoding;
+$('#space').appendChild(renderer.domElement);
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,5000);
+scene.add(new THREE.AmbientLight(0x8899cc,.45));scene.add(new THREE.PointLight(0xffffff,2.2,0,0));
+const dot=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.3,'rgba(255,255,255,.5)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return new THREE.CanvasTexture(c)})();
+const glow=(col,s,o)=>{const p=new THREE.Sprite(new THREE.SpriteMaterial({map:dot,color:col,transparent:true,opacity:o,depthWrite:false,blending:THREE.AdditiveBlending}));p.scale.set(s,s,1);return p};
+{const n=3000,p=new Float32Array(n*3),v=new THREE.Vector3();for(let i=0;i<n;i++){v.set(Math.random()-.5,Math.random()-.5,Math.random()-.5).normalize().multiplyScalar(1500);p.set([v.x,v.y,v.z],i*3)}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));scene.add(new THREE.Points(g,new THREE.PointsMaterial({size:2.6,map:dot,transparent:true,opacity:.9,depthWrite:false,sizeAttenuation:false})))}
+function tex(col){const c=document.createElement('canvas');c.width=256;c.height=128;const x=c.getContext('2d');x.fillStyle=col;x.fillRect(0,0,256,128);
+ for(let i=0;i<22;i++){x.fillStyle=`rgba(${i%2?'255,255,255':'0,0,0'},${.05+Math.random()*.1})`;const y=Math.random()*128;x.beginPath();x.moveTo(0,y);for(let k=0;k<=256;k+=16)x.lineTo(k,y+Math.sin(k/20+i)*4);x.lineTo(256,y+10+Math.random()*14);x.lineTo(0,y+10+Math.random()*14);x.fill()}
+ for(let i=0;i<260;i++){x.fillStyle=`rgba(255,255,255,${Math.random()*.12})`;x.fillRect(Math.random()*256,Math.random()*128,2,2)}
+ const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;return t}
+const core=new THREE.Mesh(new THREE.SphereGeometry(13,64,48),new THREE.MeshBasicMaterial({map:tex(META.core)}));scene.add(core);
+[[META.core,60,.9],[META.core,130,.35]].forEach(a=>{const g=glow(...a);scene.add(g)});
+D.forEach((d,i)=>{d.R=58+(i%3)*24;d.ang=i/D.length*TAU;d.sp=.16/(1+d.R/50);
+ const pts=[];for(let k=0;k<=128;k++)pts.push(new THREE.Vector3(Math.cos(k/128*TAU)*d.R,0,Math.sin(k/128*TAU)*d.R));
+ if(i<3)scene.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x4d6a8c,transparent:true,opacity:.28})));
+ const m=new THREE.Mesh(new THREE.SphereGeometry(7,48,32),new THREE.MeshStandardMaterial({map:tex(d.col),roughness:.85,emissive:new THREE.Color(d.col),emissiveIntensity:.12}));
+ m.add(glow(d.col,30,.45));m.userData.i=i;scene.add(m);d.mesh=m;
+ const l=document.createElement('div');l.className='lbl';l.textContent=d.lb;document.body.appendChild(l);d.el=l});
+const coreLbl=document.createElement('div');coreLbl.className='lbl';coreLbl.textContent=META.coreLabel;coreLbl.style.fontSize='14px';document.body.appendChild(coreLbl);
+
+/* ---- الواجهة ---- */
+let sel=null,sup=false,tab='i',seen=new Set(),toasted=false;
+const chips=$('#chips'),mk=(h,f)=>{const b=document.createElement('button');b.className='chip';b.innerHTML=h;b.onclick=f;chips.appendChild(b);return b};
+const allB=mk('🌌 الكل',()=>pick(-1));
+D.forEach((d,i)=>{const b=mk(`<i></i>${d.lb}`,()=>pick(i));b.style.setProperty('--c',d.col);d.chip=b});
+$('#cnt').textContent=`0/${D.length}`;
+$('#sp').onclick=()=>{sup=!sup;$('#sp').classList.toggle('on',sup);tab='i';render()};
+const list=a=>'<ul>'+a.map(x=>`<li>${x}</li>`).join('')+'</ul>';
+function info(d){let h=`<h2>${d.ar}</h2><span class="en">${d.n}</span><p class="tg">${d.tag}</p><h4>${META.l1}</h4><p>${d.d}</p>`;
+ d.sec.forEach(([t,v])=>{h+=`<h4>${t}</h4>`+(Array.isArray(v)?list(v):v.code?`<pre>${esc(v.code)}</pre>`:`<p>${v}</p>`)});
+ return h+`<h4>${META.l2}</h4><div class="stars">${'★'.repeat(d.diff)+'☆'.repeat(5-d.diff)}</div><div class="fact">💡 هل تعلم؟ ${d.fact}</div>`}
+function supv(d){return `<h2>${d.ar}</h2><span class="en">${d.n}</span><h4>تشبيه بسيط للطالب</h4><p>${d.an}</p><h4>أسئلة متوقعة وإجاباتها</h4>`+d.qa.map(([q,a])=>`<div class="qa"><b>${q}</b>${a}</div>`).join('')}
+function general(){return `<h2>دليل المشرف</h2><span class="en">${META.title}</span><h4>نقاط تقولها للطلاب</h4>${list(META.sup)}`}
+function render(){const s=$('#sheet');if(!sel&&!sup){s.classList.remove('on');return}
+ s.style.setProperty('--c',sel?sel.col:'#ffc247');let h='';
+ if(sup&&sel)h+=`<div class="tabs"><button class="tb ${tab=='i'?'a':''}" data-t="i">الشرح</button><button class="tb ${tab=='s'?'a':''}" data-t="s">للمشرف</button></div>`;
+ h+=!sel?general():(!sup||tab=='i')?info(sel):supv(sel);s.innerHTML=h;s.scrollTop=0;s.classList.add('on');
+ s.querySelectorAll('.tb').forEach(b=>b.onclick=()=>{tab=b.dataset.t;render()})}
+function pick(i){sel=i<0?null:D[i];want=sel?26:215;tab='i';$('#hint').style.opacity=0;
+ allB.classList.toggle('on',!sel);D.forEach(d=>d.chip.classList.toggle('on',d===sel));
+ if(sel){seen.add(sel.n);sel.chip.classList.add('seen');$('#cnt').textContent=`${seen.size}/${D.length}`;sel.chip.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  if(seen.size===D.length&&!toasted){toasted=true;setTimeout(()=>{const t=$('#toast');t.innerHTML=META.done;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),6000)},900)}}
+ render()}
+$('#toast').onclick=()=>$('#toast').classList.remove('on');
+
+/* ---- الكاميرا والتفاعل ---- */
+let yaw=.6,pitch=.45,dist=215,want=215,offY=0,idle=0;const cur=new THREE.Vector3();allB.classList.add('on');
+const cv=renderer.domElement,ptr=new Map();let pinch=0,down={x:0,y:0},moved=0;
+cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);ptr.set(e.pointerId,{x:e.clientX,y:e.clientY});down={x:e.clientX,y:e.clientY};moved=0;pinch=0;idle=3;$('#hint').style.opacity=0});
+cv.addEventListener('pointermove',e=>{const p=ptr.get(e.pointerId);if(!p)return;const dx=e.clientX-p.x,dy=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY;moved+=Math.abs(dx)+Math.abs(dy);idle=3;
+ if(ptr.size===2){const[a,b]=[...ptr.values()],d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch)want=clamp(want*Math.exp(-(d-pinch)*.006),14,330);pinch=d;return}
+ yaw-=dx*.006;pitch=clamp(pitch+dy*.006,-1.2,1.3)});
+const up=e=>{ptr.delete(e.pointerId);pinch=0;
+ if(e.type==='pointerup'&&ptr.size===0&&moved<8){const rc=new THREE.Raycaster();rc.setFromCamera(new THREE.Vector2(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1),camera);
+  const h=rc.intersectObjects(D.map(d=>d.mesh),false)[0];if(h)pick(h.object.userData.i)}};
+cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+cv.addEventListener('wheel',e=>{e.preventDefault();want=clamp(want*Math.exp(e.deltaY*.001),14,330)},{passive:false});
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+const clock=new THREE.Clock(),v3=new THREE.Vector3();
+function frame(){requestAnimationFrame(frame);const dt=Math.min(clock.getDelta(),.05);
+ core.rotation.y+=dt*.2;
+ D.forEach(d=>{d.ang+=d.sp*dt;d.mesh.position.set(Math.cos(d.ang)*d.R,Math.sin(d.ang*2+d.R)*3,Math.sin(d.ang)*d.R);d.mesh.rotation.y+=dt*.4});
+ if(!sel&&idle<=0)yaw+=dt*.07;idle=Math.max(0,idle-dt);
+ cur.lerp(sel?sel.mesh.position:v3.set(0,0,0),1-Math.exp(-5*dt));dist+=(want-dist)*(1-Math.exp(-4*dt));
+ const c=Math.cos(pitch);camera.position.set(cur.x+Math.sin(yaw)*c*dist,cur.y+Math.sin(pitch)*dist,cur.z+Math.cos(yaw)*c*dist);camera.lookAt(cur);
+ const H=innerHeight;offY+=((sel||sup?H*.2:0)-offY)*(1-Math.exp(-4*dt));camera.setViewOffset(innerWidth,H,0,offY,innerWidth,H);
+ const lab=(el,pos,r,show)=>{v3.copy(pos);v3.y+=r*1.5;v3.project(camera);const ok=show&&v3.z<1&&Math.abs(v3.x)<1.1&&Math.abs(v3.y)<1.1;el.style.display=ok?'block':'none';if(ok)el.style.transform=`translate(${(v3.x*.5+.5)*innerWidth}px,${(-v3.y*.5+.5)*H}px) translate(-50%,-100%)`};
+ D.forEach(d=>lab(d.el,d.mesh.position,7,dist>40||d!==sel));lab(coreLbl,core.position,13,dist>40);
+ renderer.render(scene,camera)}
+frame();
+</script>
+</body>
+</html>
