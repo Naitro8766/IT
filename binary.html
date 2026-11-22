@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>اسمك بلغة الحاسوب - ركن IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#02040a radial-gradient(circle at 50% 0%,#0b2a5b55,transparent 60%) no-repeat;color:#fff;font-family:Cairo,Tahoma,sans-serif;min-height:100vh;touch-action:manipulation}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 16px;background:linear-gradient(#02040af0 60%,transparent)}
+.brand{font-weight:800;font-size:15px;line-height:1.3}.brand small{display:block;font-weight:600;font-size:11px;color:#7fd6ff}
+.pill{border:1px solid #ffffff30;background:#0a1424cc;color:#fff;border-radius:18px;padding:5px 12px;font:700 12px Cairo,sans-serif;cursor:pointer}.pill.on{border-color:#ffc247;color:#ffc247}
+main{max-width:640px;margin:0 auto;padding:calc(76px + env(safe-area-inset-top,0px)) 12px calc(28px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.card{border:1px solid #6fb7ff33;background:#0a1424cc;border-radius:14px;padding:12px 14px}
+.card p{margin:4px 0;font-size:14px;line-height:1.8;color:#dbe7f3}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:104px}.between{justify-content:space-between}
+.b{background:#55caff;color:#04111f;border:0;border-radius:10px;padding:11px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+.b.alt{background:none;color:#bfeaff;border:1px solid #55caff88}.b.alt.on{background:#55caff30;border-color:#55caff;color:#fff}
+.b:disabled{opacity:.4}
+.in,select{width:100%;background:#020611;border:1px solid #55caff88;color:#fff;border-radius:10px;padding:10px 12px;font:16px Cairo,sans-serif}
+.msg{min-height:26px;font-weight:700;color:#ffe9b0}
+.sup{position:fixed;left:0;right:0;bottom:0;max-height:80vh;overflow-y:auto;z-index:40;background:#071120f7;border-top:2px solid #ffc247;border-radius:18px 18px 0 0;padding:14px 16px calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .3s}
+.sup.on{transform:none}.sup h3{margin:0 0 4px;color:#ffc247}.sup h4{margin:12px 0 4px;color:#7fd6ff;font-size:14px}
+.sup p,.sup li{font-size:13.5px;line-height:1.85;color:#e2ebf5}.sup ul{padding:0 18px 0 0;margin:2px 0}
+.qa{margin:6px 0;padding:8px 10px;border-radius:10px;background:#ffffff0f}.qa b{display:block;color:#ffc247;font-size:13px}
+.x{float:left;background:none;border:1px solid #ffffff40;color:#fff;border-radius:50%;width:30px;height:30px;font-size:14px}
+#welcome{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%,#0b2a5b 0%,#050c19 60%,#02040a 100%);transition:opacity .7s,visibility .7s}
+#welcome.out{opacity:0;visibility:hidden;pointer-events:none}
+#welcome .col{font-size:15px;font-weight:600;color:#a6c8e8}
+#welcome .it{direction:ltr;font-size:60px;font-weight:800;line-height:1;text-shadow:0 0 28px #55caffaa,0 0 60px #2a80ff66}#welcome .it b{color:#58d5ff}
+#welcome .ln{width:70px;height:2px;background:linear-gradient(90deg,transparent,#55caff,transparent)}
+#welcome .ti{font-size:22px;font-weight:800;color:#bfeaff}#welcome .by{font-size:12px;color:#8fb0cc}
+#welcome .bt{direction:ltr;padding:4px 16px;border:1px solid #55caff88;border-radius:20px;background:#0a2a4a99;color:#bfeaff;font-size:16px;font-weight:800;letter-spacing:2px}
+#welcome .hi{font-size:20px;font-weight:800}
+#welcome button{margin-top:6px;padding:11px 26px;border:1px solid #5bcaff;border-radius:26px;background:#28a0dc55;color:#fff;font:700 15px Cairo,sans-serif;cursor:pointer}
+
+.cards{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 10px;direction:rtl}
+.ch{flex:none;min-width:74px;text-align:center;border:1px solid #55caff55;border-radius:12px;padding:8px 6px;background:#06101f}
+.ch .g{font-size:30px;font-weight:800;color:#fff}.ch .n{color:#ffc247;font-size:13px;margin:2px 0;font-weight:700}
+.ch .bn{direction:ltr;font:12px/1.6 "Courier New",monospace;color:#3dff86}
+.bits{display:flex;gap:5px;direction:ltr;margin:8px 0}
+.bt{flex:1;border:1px solid #55caff66;background:#06101f;color:#fff;border-radius:10px;padding:8px 0;font:800 18px "Courier New",monospace;display:flex;flex-direction:column;align-items:center;gap:2px}
+.bt small{font-size:10px;color:#8fb0cc}.bt.on{background:#3dff8630;border-color:#3dff86;color:#3dff86}
+
+</style>
+</head>
+<body>
+<div id="welcome"><div class="col">كلية الحاسوب</div><div class="it">ركن IT<b>.</b></div><div class="ln"></div><div class="ti">اسمك بلغة الحاسوب</div><div class="by">تعديل وتجهيز</div><div class="bt">Batch 33</div><div class="hi">مرحباً بكم في بيتكم 💻</div><button id="go">ابدأ 🚀</button></div>
+<header class="top"><div class="brand">كلية الحاسوب - ركن IT<small>اسمك بلغة الحاسوب</small></div><button class="pill" id="sp">👤 مشرف</button></header>
+<main>
+
+<canvas id="pc" height="240" style="align-self:center;border-radius:14px;background:#030a06;border:1px solid #3dff8633"></canvas>
+<p style="text-align:center;color:#8fb0cc;font-size:12px;margin:-4px 0">المس الأصفار والواحدات بإصبعك وشاهدها تتحرك ✨</p>
+<div class="card"><label for="nm"><b>اكتب اسمك</b> (عربي أو إنجليزي)</label><input class="in" id="nm" maxlength="12" value="IT" style="margin-top:6px"></div>
+<div class="card"><b>اسمك بلغة الحاسوب</b><p style="font-size:12px;color:#8fb0cc">لكل حرف: الحرف، ثم رقمه، ثم الرقم بالأصفار والواحدات</p><div id="cards" class="cards"></div><p id="info"></p></div>
+<div class="card"><b>🔧 اصنع حرفاً بنفسك</b><p style="font-size:12px;color:#8fb0cc">اضغط على الخانات لتشغيلها (1) أو إطفائها (0). الأرقام فوقها هي قيمة كل خانة.</p><div id="bits" class="bits"></div><p id="bres" style="min-height:44px"></p>
+<div class="row"><button class="b alt" data-v="65">A = 65</button><button class="b alt" data-v="97">a = 97</button><button class="b alt" data-v="55">7 = 55</button><button class="b alt" data-v="64">@ = 64</button></div></div>
+
+</main>
+<div class="sup" id="sup"><button class="x" id="supx" aria-label="إغلاق">✕</button>
+<h3>دليل المشرف: اسمك بلغة الحاسوب</h3>
+<h4>الفكرة في جملة</h4><p>الحاسوب لا يفهم الحروف، بل <b>أرقاماً مكتوبة بالصفر والواحد</b>. الطالب يكتب اسمه فيرى كيف يراه الحاسوب، ثم يلعب بالأصفار والواحدات.</p>
+<h4>ما الذي يتعلمه؟</h4><ul><li><b>البت (Bit):</b> خانة واحدة: 0 أو 1. وكل <b>8 بت = بايت (Byte)</b> = حرف إنجليزي واحد.</li><li><b>الترميز:</b> لكل حرف رقم متفق عليه (مثل A=65)، ثم يُحوَّل إلى ثنائي.</li><li>لماذا 0 و1؟ لأن أجزاء الحاسوب الإلكترونية لها حالتان: يمر تيار أو لا يمر.</li></ul>
+<h4>كيف تُقرأ الخانات الثمانية؟</h4><p>قيمها من اليسار: 128، 64، 32، 16، 8، 4، 2، 1. نجمع قيم الخانات المضاءة. مثال: <b>A</b> = 64 + 1 = 65 = <span dir="ltr">01000001</span>.</p>
+<h4>أسئلة متوقعة</h4>
+<div class="qa"><b>لماذا الحرف العربي 16 بت؟</b>الترميز الأقدم (ASCII) يغطي الإنجليزية فقط بـ 8 بت. العربية وبقية اللغات تحتاج ترميزاً أوسع (UTF-8)، فتأخذ حروفها بايتين.</div>
+<div class="qa"><b>ما الرقم الظاهر تحت الحرف؟</b>هو رقم الحرف في جدول الترميز (Unicode). وتحته الرقم نفسه بالثنائي.</div>
+<div class="qa"><b>لماذا يقول "؟" لبعض الأرقام؟</b>الحروف الظاهرة بالإنجليزية في الجدول البسيط من 32 إلى 126 فقط، وما دونها رموز تحكم لا تُرى.</div>
+<div class="qa"><b>هل الصور والفيديو أيضاً أصفار وواحدات؟</b>نعم، كل شيء في الحاسوب بيانات ثنائية، والفرق في طريقة تفسيرها.</div>
+<h4>بعد أن ينتهي</h4><p>"كل ما تراه على التلفون، من اسمك وصورك وفيديوهاتك، أصله أصفار وواحدات. والمبرمج هو من يتحكم فيها."</p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+$('#go').onclick=()=>{$('#welcome').classList.add('out');setTimeout(()=>$('#welcome').remove(),800)};
+$('#sp').onclick=()=>{const o=$('#sup').classList.toggle('on');$('#sp').classList.toggle('on',o)};
+$('#supx').onclick=()=>{$('#sup').classList.remove('on');$('#sp').classList.remove('on')};
+
+const pc=$('#pc'),px=pc.getContext('2d');let PW=0,PH=240,parts=[],ptr={x:-999,y:-999,on:0};
+function size(){PW=Math.min(innerWidth-24,640);pc.width=PW;pc.height=PH;pc.style.width=PW+'px'}
+function targets(txt){const o=document.createElement('canvas');o.width=PW;o.height=PH;const c=o.getContext('2d');c.fillStyle='#fff';c.textAlign='center';c.textBaseline='middle';c.direction='auto';
+ let fs=150;c.font='800 '+fs+'px Cairo,Tahoma,sans-serif';while(c.measureText(txt).width>PW-30&&fs>30){fs-=6;c.font='800 '+fs+'px Cairo,Tahoma,sans-serif'}
+ c.fillText(txt,PW/2,PH/2+4);const d=c.getImageData(0,0,PW,PH).data,t=[],st=fs>100?7:fs>60?6:5;
+ for(let y=0;y<PH;y+=st)for(let x=0;x<PW;x+=st)if(d[(y*PW+x)*4+3]>128)t.push([x,y]);
+ while(t.length>900)t.splice(Math.floor(Math.random()*t.length),1);return t}
+function setText(txt){const t=targets(txt||' ');while(parts.length<t.length)parts.push({x:Math.random()*PW,y:Math.random()*PH,vx:0,vy:0,b:Math.random()<.5?'0':'1'});parts.length=t.length;parts.forEach((p,i)=>{p.tx=t[i][0];p.ty=t[i][1]})}
+function loop(){px.clearRect(0,0,PW,PH);px.font='10px "Courier New",monospace';px.textAlign='center';px.textBaseline='middle';
+ for(const p of parts){let dx=p.tx-p.x,dy=p.ty-p.y;p.vx+=dx*.03;p.vy+=dy*.03;
+  if(ptr.on){const qx=p.x-ptr.x,qy=p.y-ptr.y,d2=qx*qx+qy*qy;if(d2<4900){const f=(70-Math.sqrt(d2))*.06,m=Math.sqrt(d2)||1;p.vx+=qx/m*f*3;p.vy+=qy/m*f*3}}
+  p.vx*=.86;p.vy*=.86;p.x+=p.vx;p.y+=p.vy;if(Math.random()<.004)p.b=p.b==='0'?'1':'0';
+  px.fillStyle=p.b==='1'?'#55caff':'#3dff86';px.fillText(p.b,p.x,p.y)}requestAnimationFrame(loop)}
+const rect=()=>pc.getBoundingClientRect();
+const mv=e=>{const r=rect();ptr.x=e.clientX-r.left;ptr.y=e.clientY-r.top;ptr.on=1};
+pc.addEventListener('pointerdown',mv);pc.addEventListener('pointermove',mv);pc.addEventListener('pointerup',()=>ptr.on=0);pc.addEventListener('pointerleave',()=>ptr.on=0);pc.addEventListener('pointercancel',()=>ptr.on=0);
+pc.style.touchAction='none';
+const bin=n=>n.toString(2).padStart(8,'0');
+function cards(){const v=$('#nm').value.slice(0,12);const ch=[...v];let bits=0;const box=$('#cards');box.innerHTML='';
+ ch.forEach(c=>{const bytes=[...new TextEncoder().encode(c)];bits+=bytes.length*8;const d=document.createElement('div');d.className='ch';
+  const cp=c.codePointAt(0);d.innerHTML='<div class="g">'+c.replace(/</g,'&lt;')+'</div><div class="n">'+cp+'</div><div class="bn">'+bytes.map(bin).join('<br>')+'</div>';box.appendChild(d)});
+ $('#info').innerHTML=ch.length?'اسمك يتكوّن من <b>'+bits+'</b> بت (0 أو 1).'+(ch.some(c=>c.codePointAt(0)>127)?'<br>الحرف العربي يحتاج <b>16 بت</b> (بايتين)، والحرف الإنجليزي <b>8 بت</b> فقط.':''):'اكتب اسمك 🙂';
+ setText(v||'IT')}
+$('#nm').oninput=cards;
+const bw=$('#bits');const BV=[128,64,32,16,8,4,2,1];let on=[0,0,0,0,0,0,0,0];
+BV.forEach((v,i)=>{const b=document.createElement('button');b.className='bt';b.innerHTML='<small>'+v+'</small><span>0</span>';b.onclick=()=>{on[i]^=1;calc()};bw.appendChild(b)});
+function calc(){let s=0;[...bw.children].forEach((b,i)=>{b.classList.toggle('on',!!on[i]);b.querySelector('span').textContent=on[i];s+=on[i]*BV[i]});
+ const ch=s>=32&&s<=126?String.fromCharCode(s):'؟';$('#bres').innerHTML='<span style="direction:ltr;display:inline-block">'+on.join('')+'</span> = <b>'+s+'</b> = حرف <b style="font-size:26px;color:#3dff86">'+ch+'</b>'+(s<32||s>126?'<br><small style="color:#8fb0cc">هذا الرقم ليس حرفاً ظاهراً (من 32 إلى 126 فقط).</small>':'')}
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{const v=+b.dataset.v;on=BV.map(x=>(v&x)?1:0);calc()});
+size();addEventListener('resize',()=>{size();setText($('#nm').value||'IT')});
+cards();calc();loop();
+
+</script>
+</body>
+</html>
