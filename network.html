@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>مختبر الشبكات - ركن IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#02040a radial-gradient(circle at 50% 0%,#0b2a5b55,transparent 60%) no-repeat;color:#fff;font-family:Cairo,Tahoma,sans-serif;min-height:100vh;touch-action:manipulation}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 16px;background:linear-gradient(#02040af0 60%,transparent)}
+.brand{font-weight:800;font-size:15px;line-height:1.3}.brand small{display:block;font-weight:600;font-size:11px;color:#7fd6ff}
+.pill{border:1px solid #ffffff30;background:#0a1424cc;color:#fff;border-radius:18px;padding:5px 12px;font:700 12px Cairo,sans-serif;cursor:pointer}.pill.on{border-color:#ffc247;color:#ffc247}
+main{max-width:640px;margin:0 auto;padding:calc(76px + env(safe-area-inset-top,0px)) 12px calc(28px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.card{border:1px solid #6fb7ff33;background:#0a1424cc;border-radius:14px;padding:12px 14px}
+.card p{margin:4px 0;font-size:14px;line-height:1.8;color:#dbe7f3}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:104px}.between{justify-content:space-between}
+.b{background:#55caff;color:#04111f;border:0;border-radius:10px;padding:11px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+.b.alt{background:none;color:#bfeaff;border:1px solid #55caff88}.b.alt.on{background:#55caff30;border-color:#55caff;color:#fff}
+.b:disabled{opacity:.4}
+.in,select{width:100%;background:#020611;border:1px solid #55caff88;color:#fff;border-radius:10px;padding:10px 12px;font:16px Cairo,sans-serif}
+.msg{min-height:26px;font-weight:700;color:#ffe9b0}
+.sup{position:fixed;left:0;right:0;bottom:0;max-height:80vh;overflow-y:auto;z-index:40;background:#071120f7;border-top:2px solid #ffc247;border-radius:18px 18px 0 0;padding:14px 16px calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .3s}
+.sup.on{transform:none}.sup h3{margin:0 0 4px;color:#ffc247}.sup h4{margin:12px 0 4px;color:#7fd6ff;font-size:14px}
+.sup p,.sup li{font-size:13.5px;line-height:1.85;color:#e2ebf5}.sup ul{padding:0 18px 0 0;margin:2px 0}
+.qa{margin:6px 0;padding:8px 10px;border-radius:10px;background:#ffffff0f}.qa b{display:block;color:#ffc247;font-size:13px}
+.x{float:left;background:none;border:1px solid #ffffff40;color:#fff;border-radius:50%;width:30px;height:30px;font-size:14px}
+#welcome{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%,#0b2a5b 0%,#050c19 60%,#02040a 100%);transition:opacity .7s,visibility .7s}
+#welcome.out{opacity:0;visibility:hidden;pointer-events:none}
+#welcome .col{font-size:15px;font-weight:600;color:#a6c8e8}
+#welcome .it{direction:ltr;font-size:60px;font-weight:800;line-height:1;text-shadow:0 0 28px #55caffaa,0 0 60px #2a80ff66}#welcome .it b{color:#58d5ff}
+#welcome .ln{width:70px;height:2px;background:linear-gradient(90deg,transparent,#55caff,transparent)}
+#welcome .ti{font-size:22px;font-weight:800;color:#bfeaff}#welcome .by{font-size:12px;color:#8fb0cc}
+#welcome .bt{direction:ltr;padding:4px 16px;border:1px solid #55caff88;border-radius:20px;background:#0a2a4a99;color:#bfeaff;font-size:16px;font-weight:800;letter-spacing:2px}
+#welcome .hi{font-size:20px;font-weight:800}
+#welcome button{margin-top:6px;padding:11px 26px;border:1px solid #5bcaff;border-radius:26px;background:#28a0dc55;color:#fff;font:700 15px Cairo,sans-serif;cursor:pointer}
+
+#net{position:relative;height:340px;border:1px solid #6fb7ff33;border-radius:14px;background:#06101f;overflow:hidden;touch-action:manipulation}
+#cab{position:absolute;inset:0;width:100%;height:100%}
+.dev{position:absolute;transform:translate(-50%,-50%);min-width:70px;text-align:center;background:#0a1830;border:1px solid #55caff55;border-radius:12px;padding:4px 6px;color:#fff;font:700 12px Cairo,sans-serif;cursor:pointer}
+.dev .ic{font-size:24px;display:block;line-height:1.2}.dev small{display:block;direction:ltr;color:#3dff86;font-size:10px;min-height:13px}
+.dev.sel{border-color:#ffc247;box-shadow:0 0 12px #ffc24788}
+.pk{position:absolute;width:16px;height:16px;border-radius:50%;background:#ffc247;box-shadow:0 0 14px #ffc247;transform:translate(-50%,-50%);pointer-events:none;display:none;z-index:5}
+.gc{display:inline-block;margin:3px;padding:5px 10px;border-radius:10px;border:1px solid #55caff55;font-size:13px;font-weight:700;direction:ltr}.gc.okc{border-color:#3dff86;color:#3dff86}
+.good{color:#3dff86;font-weight:700}.bad{color:#ff8fa3;font-weight:700}
+.fl{font-size:12px;color:#8fb0cc;margin:6px 0 2px;display:block}.wn{font-size:12px;color:#ffc247;min-height:16px}
+
+</style>
+</head>
+<body>
+<div id="welcome"><div class="col">كلية الحاسوب</div><div class="it">ركن IT<b>.</b></div><div class="ln"></div><div class="ti">مختبر الشبكات</div><div class="by">تعديل وتجهيز</div><div class="bt">Batch 33</div><div class="hi">مرحباً بكم في بيتكم 💻</div><button id="wgo">ابدأ 🚀</button></div>
+<header class="top"><div class="brand">كلية الحاسوب - ركن IT<small>مختبر الشبكات</small></div><button class="pill" id="sp">👤 مشرف</button></header>
+<main>
+
+<div class="card"><b id="lv" style="color:#7fd6ff"></b><p id="goal"></p><p id="nt" style="color:#ffe9b0;font-size:13px;font-weight:700"></p></div>
+<div class="row"><button class="b alt on" id="md1">🔌 توصيل كابل</button><button class="b alt" id="md2">✏️ ضبط العنوان</button></div>
+<div id="net"><svg id="cab" viewBox="0 0 100 100" preserveAspectRatio="none"></svg><div class="pk" id="pk"></div></div>
+<div class="card" id="ed" style="display:none"><b>ضبط الجهاز: <span id="edn"></span></b>
+<label class="fl" for="ip">عنوان IP</label><input class="in" id="ip" dir="ltr" inputmode="decimal" placeholder="192.168.1.10" autocomplete="off"><div class="wn" id="ipw"></div>
+<div id="gwrow" style="display:none"><label class="fl" for="gw">البوابة Gateway</label><input class="in" id="gw" dir="ltr" inputmode="decimal" placeholder="192.168.1.1" autocomplete="off"><div class="wn" id="gww"></div></div>
+<p style="font-size:12px;color:#8fb0cc">قناع الشبكة ثابت: 255.255.255.0 (يعني: الأجهزة في نفس الشبكة إذا تطابقت أول ثلاثة أرقام من عناوينها).</p></div>
+<div class="card"><b>📶 اختبار الاتصال (Ping)</b><div class="row" style="margin:8px 0"><select id="sa" aria-label="من"></select><select id="sb" aria-label="إلى"></select></div><button class="b" id="png" style="width:100%">أرسل Ping</button><p id="res" style="min-height:24px;margin-top:8px"></p></div>
+<div class="card"><b>🎯 الهدف</b><div id="gl" style="margin:6px 0"></div><div class="row"><button class="b" id="chk">✅ تحقق من الحل</button><button class="b alt" id="hint">💡 تلميح</button><button class="b alt" id="rst">↺ إعادة</button></div>
+<p id="hintbox" style="color:#ffe9b0"></p><p class="msg" id="msg"></p><button class="b" id="nx" style="display:none;width:100%"></button></div>
+
+</main>
+<div class="sup" id="sup"><button class="x" id="supx" aria-label="إغلاق">✕</button>
+<h3>دليل المشرف: مختبر الشبكات</h3>
+<h4>الفكرة في جملة</h4><p>الطالب يبني شبكة صغيرة بنفسه: يوصّل الأجهزة بكابلات، ويعطيها عناوين IP، ثم يختبر الاتصال بـ Ping ويفهم سبب النجاح أو الفشل.</p>
+<h4>المفاهيم التي تشرحها له</h4><ul>
+<li><b>IP Address:</b> عنوان الجهاز في الشبكة، مثل رقم البيت في الحي. شكله أربعة أرقام: 192.168.1.10</li>
+<li><b>نفس الشبكة:</b> هنا القاعدة المبسطة: الأرقام الثلاثة الأولى متطابقة، والرقم الأخير يختلف من جهاز لآخر.</li>
+<li><b>Switch (سويتش):</b> يربط أجهزة كثيرة في شبكة محلية واحدة (LAN). شكل الربط يسمى نجمة (Star).</li>
+<li><b>Router (راوتر):</b> يربط شبكتين مختلفتين، مثل بوابة بين حيّين.</li>
+<li><b>Gateway (بوابة):</b> عنوان الراوتر الذي يخرج منه الجهاز إلى شبكات أخرى. يُضبط في الطرفين.</li>
+<li><b>Ping:</b> إرسال حزمة صغيرة للاختبار: هل أنت هناك؟ فيرد الجهاز إن وصل إليه.</li></ul>
+<h4>حلول المستويات</h4><ul>
+<li><b>1:</b> وصّل PC1 مع PC2. العناوين: 192.168.1.10 و192.168.1.11.</li>
+<li><b>2:</b> وصّل كل حاسوب بـ SW1. العناوين: 192.168.1.10 و.11 و.12.</li>
+<li><b>3:</b> غيّر عنوان PC3 من 192.168.5.12 إلى 192.168.1.12 (أو أي عنوان يبدأ بـ 192.168.1).</li>
+<li><b>4:</b> غيّر الرقم الأخير لأحد الجهازين المتشابهين (مثلاً PC2 إلى 192.168.1.11).</li>
+<li><b>5:</b> وصّل RT1 مع SW1 ومع SW2. ثم Gateway: PC1 وPC2 = 192.168.1.1، وPC3 وPC4 = 192.168.2.1.</li></ul>
+<h4>رسائل الفشل وما تعنيه</h4><ul>
+<li><b>لا يوجد مسار:</b> ناقص كابل.</li><li><b>شبكتان مختلفتان:</b> العنوانان في شبكتين، والحل تغيير أحدهما أو إضافة راوتر.</li>
+<li><b>تعارض IP:</b> عنوان مكرر.</li><li><b>لا يعرف طريق الخروج / الرد:</b> Gateway ناقص أو خاطئ في أحد الطرفين.</li></ul>
+<h4>أسئلة متوقعة</h4>
+<div class="qa"><b>لماذا الحاسوب له منفذ واحد؟</b>تبسيطاً، لنُظهر لماذا نحتاج السويتش. الحاسوب الحقيقي يمكن أن يكون له أكثر من منفذ.</div>
+<div class="qa"><b>ما الفرق بين السويتش والراوتر؟</b>السويتش يربط الأجهزة داخل شبكة واحدة. الراوتر يربط بين شبكات مختلفة (وبيتك يربطك بالإنترنت عبر راوتر).</div>
+<div class="qa"><b>ما هو القناع 255.255.255.0؟</b>رقم يحدد أي جزء من العنوان هو "اسم الشبكة". وهنا هو أول ثلاثة أرقام. ثبّتناه للتبسيط.</div>
+<div class="qa"><b>هل هذه شبكة حقيقية؟</b>هي محاكاة مبسطة لفكرة الشبكات. في الحقيقة هناك تفاصيل أكثر مثل الأقنعة المختلفة وجداول التوجيه.</div>
+<div class="qa"><b>ما هي WAN؟</b>شبكة واسعة تربط شبكات محلية متباعدة، والإنترنت أكبر مثال عليها.</div>
+<h4>بعد أن ينتهي</h4><p>"اليوم بنيت شبكة: وصّلت الأجهزة، وأعطيتها عناوين، وعرفت لماذا لا تتصل. هذا بالضبط عمل مهندس الشبكات، وهو من المسارات الأساسية في التخصص."</p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+$('#wgo').onclick=()=>{$('#welcome').classList.add('out');setTimeout(()=>$('#welcome').remove(),800)};
+$('#sp').onclick=()=>{const o=$('#sup').classList.toggle('on');$('#sp').classList.toggle('on',o)};
+$('#supx').onclick=()=>{$('#sup').classList.remove('on');$('#sp').classList.remove('on')};
+
+let L,D,CB;
+const nbrs=id=>CB.filter(c=>c.includes(id)).map(c=>c[0]===id?c[1]:c[0]);
+const parseIP=s=>{const m=/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec((s||'').trim());if(!m)return null;const o=m.slice(1).map(Number);return o.every(x=>x<=255)?o:null};
+const netOf=o=>o.slice(0,3).join('.');
+function explore(start,only){const seen=new Set([start]),q=[],res=[];
+ for(const n of(only?[only]:nbrs(start)))if(!seen.has(n)){seen.add(n);q.push([n,[start,n]])}
+ while(q.length){const[cur,p]=q.shift();if(D[cur].t!=='sw'){res.push({id:cur,path:p,via:p[p.length-2]});continue}
+  for(const n of nbrs(cur))if(!seen.has(n)){seen.add(n);q.push([n,[...p,n]])}}return res}
+const rtIP=(r,via)=>(L.rtIf&&L.rtIf[via])||null;
+const bad=(code,msg)=>({ok:false,code,msg});
+function ping(a,b){const A=D[a],T=D[b],ia=parseIP(A.ip),ib=parseIP(T.ip);
+ if(!ia)return bad('noip','الجهاز '+a+' ليس له عنوان IP صحيح. اكتبه بالشكل 192.168.1.10');
+ if(!ib)return bad('noip','الجهاز '+b+' ليس له عنوان IP صحيح. اكتبه بالشكل 192.168.1.10');
+ const dm=explore(a),hit=dm.find(m=>m.id===b);
+ const ips=[A.ip.trim(),...dm.map(m=>D[m.id].t==='pc'?D[m.id].ip.trim():rtIP(m.id,m.via))];
+ const dup=ip=>ips.filter(x=>x===ip).length>1;
+ if(netOf(ia)===netOf(ib)){
+  if(!hit)return bad('nopath','لا يوجد مسار بالكابلات بين '+a+' و'+b+'. وصّلهما مباشرة أو عبر سويتش.');
+  if(dup(A.ip.trim())||dup(T.ip.trim()))return bad('conflict','تعارض في العناوين (IP Conflict): يوجد جهازان لهما نفس العنوان في الشبكة، فلا يعرف الحاسوب لمن يرسل.');
+  return{ok:true,path:hit.path,ms:1+((a.length*7+b.length*3)%4)}}
+ if(hit)return bad('subnet','الجهازان في شبكتين مختلفتين (الأرقام الثلاثة الأولى من العنوان مختلفة)، ولا يوجد راوتر بينهما. اجعلهما في نفس الشبكة.');
+ if(!parseIP(A.gw))return bad('nogw','الهدف في شبكة أخرى، والجهاز '+a+' لا يعرف طريق الخروج من شبكته. أدخل Gateway (عنوان الراوتر).');
+ const gwo=parseIP(A.gw);if(netOf(gwo)!==netOf(ia))return bad('gwsub','الـ Gateway يجب أن يكون في نفس شبكة الجهاز (أول ثلاثة أرقام متطابقة).');
+ const r=dm.find(m=>D[m.id].t==='rt'&&rtIP(m.id,m.via)===A.gw.trim());
+ if(!r)return bad('badgw','لا يوجد راوتر عنوانه '+A.gw.trim()+' موصول بشبكتك. وصّل الراوتر بالسويتش وتأكد من عنوان البوابة.');
+ for(const n2 of nbrs(r.id)){if(n2===r.via)continue;const ip2=rtIP(r.id,n2);const o2=parseIP(ip2);if(!o2||netOf(o2)!==netOf(ib))continue;
+  const t2=explore(r.id,n2).find(m=>m.id===b);if(!t2)continue;
+  if(!parseIP(T.gw)||T.gw.trim()!==ip2)return bad('noreply','وصلت الرسالة للهدف، لكن '+b+' لا يعرف طريق الرد لأن Gateway عنده غير صحيح (يجب '+ip2+'). الشبكتان تحتاجان بوابة من الطرفين.');
+  return{ok:true,path:[...r.path,...t2.path.slice(1)],ms:3+((a.length+b.length)%4)}}
+ return bad('norouterpath','الراوتر لا يصل إلى شبكة '+b+'. وصّله بالشبكة الثانية وتأكد من عنوان '+b+'.')}
+
+const LV=[
+{t:'1: وصّل جهازين',g:'وصّل الحاسوبين بكابل، ثم أعطِ كل جهاز عنوان IP حتى يتصلا.',mode:'cable',gw:0,
+ dev:[['PC1','pc',20,50,''],['PC2','pc',80,50,'']],cb:[],goals:[['PC1','PC2']],
+ hint:'اضغط 🔌 ثم الحاسوبين لتوصيلهما. بعدها اضغط ✏️ ثم كل جهاز واكتب عنواناً مثل 192.168.1.10 و192.168.1.11 (الأرقام الثلاثة الأولى نفسها والرقم الأخير مختلف).',
+ lr:'جهازان موصولان بكابل ولهما عنوانان في نفس الشبكة يتصلان ببعضهما.'},
+{t:'2: أضف سويتش (Switch)',g:'وصّل الحواسيب الثلاثة ببعضها، بحيث يتصل كل جهاز بالآخرين.',mode:'cable',gw:0,
+ dev:[['SW1','sw',50,48,''],['PC1','pc',15,20,''],['PC2','pc',85,20,''],['PC3','pc',50,88,'']],cb:[],goals:[['PC1','PC2'],['PC1','PC3'],['PC2','PC3']],
+ hint:'الحاسوب له منفذ واحد، فاستخدم السويتش في الوسط: وصّل كل حاسوب به. ثم أعطِ العناوين 192.168.1.10 و192.168.1.11 و192.168.1.12.',
+ lr:'السويتش يربط عدة أجهزة في شبكة محلية واحدة (LAN)، وشكلها يسمى نجمة (Star).'},
+{t:'3: العنوان الخطأ',g:'الشبكة موصولة لكن أحد الأجهزة لا يتصل. اكتشف السبب وأصلحه.',mode:'ip',gw:0,
+ dev:[['SW1','sw',50,48,''],['PC1','pc',15,20,'192.168.1.10'],['PC2','pc',85,20,'192.168.1.11'],['PC3','pc',50,88,'192.168.5.12']],cb:[['PC1','SW1'],['PC2','SW1'],['PC3','SW1']],goals:[['PC1','PC2'],['PC1','PC3'],['PC2','PC3']],
+ hint:'قارن العناوين الثلاثة: واحد منها يختلف في الأرقام الثلاثة الأولى. اضغط ✏️ ثم ذلك الجهاز وغيّر عنوانه ليبدأ بـ 192.168.1.',
+ lr:'الأجهزة تتصل مباشرة فقط إذا كانت في نفس الشبكة، أي أن الأرقام الثلاثة الأولى من عناوينها متطابقة.'},
+{t:'4: عنوان مكرر',g:'جهازان لا يتصلان رغم أن الكابلات سليمة. ما المشكلة؟',mode:'ip',gw:0,
+ dev:[['SW1','sw',50,48,''],['PC1','pc',15,20,'192.168.1.10'],['PC2','pc',85,20,'192.168.1.10'],['PC3','pc',50,88,'192.168.1.12']],cb:[['PC1','SW1'],['PC2','SW1'],['PC3','SW1']],goals:[['PC1','PC2'],['PC1','PC3'],['PC2','PC3']],
+ hint:'جهازان لهما نفس العنوان بالضبط. غيّر الرقم الأخير لأحدهما.',
+ lr:'كل جهاز يلزمه عنوان فريد. تكرار العنوان يسبب تعارضاً (IP Conflict).'},
+{t:'5: شبكتان وراوتر (Router)',g:'شبكتان منفصلتان. اجعل PC1 يتصل بـ PC3، وPC2 يتصل بـ PC4.',mode:'cable',gw:1,
+ rtIf:{SW1:'192.168.1.1',SW2:'192.168.2.1'},
+ dev:[['RT1','rt',50,15,''],['SW1','sw',22,45,''],['SW2','sw',78,45,''],['PC1','pc',8,85,'192.168.1.10'],['PC2','pc',36,85,'192.168.1.11'],['PC3','pc',64,85,'192.168.2.10'],['PC4','pc',92,85,'192.168.2.11']],
+ cb:[['PC1','SW1'],['PC2','SW1'],['PC3','SW2'],['PC4','SW2']],goals:[['PC1','PC3'],['PC2','PC4']],
+ hint:'1) وصّل الراوتر بالسويتشين. 2) ✏️ ثم لكل حاسوب اكتب Gateway: 192.168.1.1 للشبكة اليسرى (PC1 وPC2)، و192.168.2.1 لليمنى (PC3 وPC4).',
+ lr:'الراوتر يربط شبكتين مختلفتين. والبوابة (Gateway) هي عنوان الراوتر الذي يخرج منه الجهاز إلى الشبكات الأخرى، وتُضبط عند الطرفين.'}];
+
+let lvl=0,sel=null,mode='cable',busy=false;const ICON={pc:'💻',sw:'🔀',rt:'📡'},LIM={pc:1,rt:2,sw:8};
+const net=$('#net'),cab=$('#cab'),pk=$('#pk');
+function say(t){$('#msg').textContent=t}
+function load(i){lvl=i;L=LV[i];D={};L.dev.forEach(([id,t,x,y,ip,gw])=>D[id]={id,t,x,y,ip:ip||'',gw:gw||''});CB=L.cb.map(c=>[...c]);sel=null;mode=L.mode;busy=false;
+ $('#lv').textContent=L.t;$('#goal').textContent=L.g;$('#hintbox').textContent='';$('#nx').style.display='none';$('#res').textContent='';say('');$('#ed').style.display='none';
+ const pcs=Object.values(D).filter(d=>d.t==='pc');['#sa','#sb'].forEach((s,k)=>{$(s).innerHTML=pcs.map(d=>'<option>'+d.id+'</option>').join('');$(s).selectedIndex=Math.min(k,pcs.length-1)});
+ $('#gwrow').style.display=L.gw?'block':'none';goals(true);render()}
+function ntype(){const c=CB.length,sws=Object.values(D).filter(d=>d.t==='sw'&&nbrs(d.id).length>=2).length,rt=Object.values(D).some(d=>d.t==='rt'&&nbrs(d.id).length>=2);
+ return rt?'🌐 شبكتان محليتان (LAN) مربوطتان براوتر':sws?'🏠 شبكة محلية (LAN) بشكل نجمة (Star)':c?'🔗 شبكة صغيرة: جهازان موصولان مباشرة':'لم تُبنَ شبكة بعد'}
+function render(){$('#nt').textContent=ntype();$('#md1').classList.toggle('on',mode==='cable');$('#md2').classList.toggle('on',mode==='ip');
+ cab.innerHTML=CB.map((c,i)=>{const a=D[c[0]],b=D[c[1]];return '<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#55caff" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round"/><line data-i="'+i+'" x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="transparent" stroke-width="22" vector-effect="non-scaling-stroke" style="cursor:pointer"/>'}).join('');
+ cab.querySelectorAll('[data-i]').forEach(l=>l.onclick=()=>{if(mode!=='cable'||busy)return;CB.splice(+l.dataset.i,1);say('تم فصل الكابل.');render()});
+ net.querySelectorAll('.dev').forEach(e=>e.remove());
+ Object.values(D).forEach(d=>{const e=document.createElement('button');e.className='dev'+(sel===d.id?' sel':'');e.style.left=d.x+'%';e.style.top=d.y+'%';
+  let sm=d.t==='pc'?(d.ip||'بدون IP'):d.t==='rt'?nbrs(d.id).map(n=>rtIP(d.id,n)).filter(Boolean).join(' | ')||'منفذان':'';
+  e.innerHTML='<span class="ic">'+ICON[d.t]+'</span>'+d.id+'<small>'+sm+'</small>';e.onclick=()=>tap(d.id);net.appendChild(e)})}
+function tap(id){if(busy)return;const d=D[id];
+ if(mode==='cable'){if(!sel){sel=id;say('اختر الجهاز الثاني لتوصيله مع '+id);render();return}
+  if(sel===id){sel=null;say('');render();return}connect(sel,id);sel=null;render();return}
+ if(d.t!=='pc'){say('العنوان يُضبط على الحواسيب فقط 💻');return}
+ sel=id;$('#ed').style.display='block';$('#edn').textContent=id;$('#ip').value=d.ip;$('#gw').value=d.gw;chk();render()}
+function connect(a,b){if(CB.some(c=>c.includes(a)&&c.includes(b)))return say('هذان الجهازان موصولان بالفعل. اضغط على الكابل لفصله.');
+ for(const x of[a,b])if(nbrs(x).length>=LIM[D[x].t])return say(D[x].t==='pc'?'الحاسوب له منفذ شبكة واحد فقط. استخدم سويتش لتوصيل أكثر من جهاز.':D[x].t==='rt'?'الراوتر هنا له منفذان فقط.':'السويتش امتلأت منافذه.');
+ CB.push([a,b]);say('✔ تم توصيل '+a+' مع '+b)}
+function chk(){const v=$('#ip').value.trim(),g=$('#gw').value.trim();$('#ipw').textContent=v&&!parseIP(v)?'⚠️ عنوان غير صالح':'';$('#gww').textContent=g&&!parseIP(g)?'⚠️ عنوان غير صالح':''}
+$('#ip').oninput=()=>{if(sel&&D[sel]){D[sel].ip=$('#ip').value;chk();render()}};$('#gw').oninput=()=>{if(sel&&D[sel]){D[sel].gw=$('#gw').value;chk();render()}};
+$('#md1').onclick=()=>{mode='cable';sel=null;$('#ed').style.display='none';say('اضغط جهازين لتوصيلهما بكابل.');render()};
+$('#md2').onclick=()=>{mode='ip';sel=null;say('اضغط على حاسوب لضبط عنوانه.');render()};
+function anim(path,ok,done){pk.style.display='block';const pts=path.map(id=>D[id]);let seg=0,t0=null;const T=420;
+ const step=ts=>{if(t0===null)t0=ts;const k=(ts-t0)/T;if(k>=1){seg++;t0=ts;if(seg>=pts.length-1){pk.style.display='none';done();return}}
+  const a=pts[seg],b=pts[seg+1],f=Math.min((ts-t0)/T,1);pk.style.left=(a.x+(b.x-a.x)*f)+'%';pk.style.top=(a.y+(b.y-a.y)*f)+'%';requestAnimationFrame(step)};requestAnimationFrame(step)}
+function doPing(a,b,show,cb){const r=ping(a,b);if(!show){cb&&cb(r);return}
+ if(a===b){$('#res').innerHTML='<span class="bad">اختر جهازين مختلفين.</span>';return}
+ busy=true;$('#res').textContent='📨 جارٍ إرسال الحزمة...';
+ const path=r.ok?r.path:(explore(a)[0]?explore(a)[0].path.slice(0,2):[a]);
+ const fin=()=>{busy=false;$('#res').innerHTML=r.ok?'<span class="good">✅ وصل الرد من '+b+' ('+D[b].ip+') خلال '+r.ms+' ms (محاكاة)</span>':'<span class="bad">❌ فشل: '+r.msg+'</span>';cb&&cb(r)};
+ if(path.length>1)anim(path,r.ok,fin);else fin()}
+$('#png').onclick=()=>{if(!busy)doPing($('#sa').value,$('#sb').value,true)};
+function goals(init){$('#gl').innerHTML=L.goals.map(g=>'<span class="gc" data-k="'+g[0]+g[1]+'">⏳ '+g[0]+' ⇄ '+g[1]+'</span>').join('');if(init)return;
+ let all=true;L.goals.forEach(g=>{const r=ping(g[0],g[1]);const e=document.querySelector('[data-k="'+g[0]+g[1]+'"]');e.textContent=(r.ok?'✅ ':'❌ ')+g[0]+' ⇄ '+g[1];e.classList.toggle('okc',r.ok);if(!r.ok)all=false});
+ if(all){say('🎉 أحسنت! '+L.lr);$('#nx').textContent=lvl<LV.length-1?'المستوى التالي ◀':'🏁 أنهيت المختبر! إعادة من البداية';$('#nx').style.display='block'}
+ else say('ما زال هناك اتصال لا يعمل. اضغط على Ping لتعرف السبب، أو اضغط 💡 للتلميح.')}
+$('#chk').onclick=()=>{if(!busy)goals(false)};
+$('#hint').onclick=()=>{$('#hintbox').textContent='💡 '+L.hint};
+$('#rst').onclick=()=>load(lvl);$('#nx').onclick=()=>load(lvl<LV.length-1?lvl+1:0);
+load(0);
+
+</script>
+</body>
+</html>
