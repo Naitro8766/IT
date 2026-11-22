@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>XO ضد الحاسوب - ركن IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#02040a radial-gradient(circle at 50% 0%,#0b2a5b55,transparent 60%) no-repeat;color:#fff;font-family:Cairo,Tahoma,sans-serif;min-height:100vh;touch-action:manipulation}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 16px;background:linear-gradient(#02040af0 60%,transparent)}
+.brand{font-weight:800;font-size:15px;line-height:1.3}.brand small{display:block;font-weight:600;font-size:11px;color:#7fd6ff}
+.pill{border:1px solid #ffffff30;background:#0a1424cc;color:#fff;border-radius:18px;padding:5px 12px;font:700 12px Cairo,sans-serif;cursor:pointer}.pill.on{border-color:#ffc247;color:#ffc247}
+main{max-width:640px;margin:0 auto;padding:calc(76px + env(safe-area-inset-top,0px)) 12px calc(28px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.card{border:1px solid #6fb7ff33;background:#0a1424cc;border-radius:14px;padding:12px 14px}
+.card p{margin:4px 0;font-size:14px;line-height:1.8;color:#dbe7f3}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:104px}.between{justify-content:space-between}
+.b{background:#55caff;color:#04111f;border:0;border-radius:10px;padding:11px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+.b.alt{background:none;color:#bfeaff;border:1px solid #55caff88}.b.alt.on{background:#55caff30;border-color:#55caff;color:#fff}
+.b:disabled{opacity:.4}
+.in,select{width:100%;background:#020611;border:1px solid #55caff88;color:#fff;border-radius:10px;padding:10px 12px;font:16px Cairo,sans-serif}
+.msg{min-height:26px;font-weight:700;color:#ffe9b0}
+.sup{position:fixed;left:0;right:0;bottom:0;max-height:80vh;overflow-y:auto;z-index:40;background:#071120f7;border-top:2px solid #ffc247;border-radius:18px 18px 0 0;padding:14px 16px calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .3s}
+.sup.on{transform:none}.sup h3{margin:0 0 4px;color:#ffc247}.sup h4{margin:12px 0 4px;color:#7fd6ff;font-size:14px}
+.sup p,.sup li{font-size:13.5px;line-height:1.85;color:#e2ebf5}.sup ul{padding:0 18px 0 0;margin:2px 0}
+.qa{margin:6px 0;padding:8px 10px;border-radius:10px;background:#ffffff0f}.qa b{display:block;color:#ffc247;font-size:13px}
+.x{float:left;background:none;border:1px solid #ffffff40;color:#fff;border-radius:50%;width:30px;height:30px;font-size:14px}
+#welcome{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%,#0b2a5b 0%,#050c19 60%,#02040a 100%);transition:opacity .7s,visibility .7s}
+#welcome.out{opacity:0;visibility:hidden;pointer-events:none}
+#welcome .col{font-size:15px;font-weight:600;color:#a6c8e8}
+#welcome .it{direction:ltr;font-size:60px;font-weight:800;line-height:1;text-shadow:0 0 28px #55caffaa,0 0 60px #2a80ff66}#welcome .it b{color:#58d5ff}
+#welcome .ln{width:70px;height:2px;background:linear-gradient(90deg,transparent,#55caff,transparent)}
+#welcome .ti{font-size:22px;font-weight:800;color:#bfeaff}#welcome .by{font-size:12px;color:#8fb0cc}
+#welcome .bt{direction:ltr;padding:4px 16px;border:1px solid #55caff88;border-radius:20px;background:#0a2a4a99;color:#bfeaff;font-size:16px;font-weight:800;letter-spacing:2px}
+#welcome .hi{font-size:20px;font-weight:800}
+#welcome button{margin-top:6px;padding:11px 26px;border:1px solid #5bcaff;border-radius:26px;background:#28a0dc55;color:#fff;font:700 15px Cairo,sans-serif;cursor:pointer}
+
+#bd{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:340px;width:100%;align-self:center;direction:ltr}
+.cell{aspect-ratio:1;border:1px solid #55caff55;border-radius:14px;background:#06101f;color:#fff;font:800 44px Cairo,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cell.x{color:#55caff;text-shadow:0 0 14px #55caff88}.cell.o{color:#ff5ea8;text-shadow:0 0 14px #ff5ea888}.cell.h{font-size:30px;background:#ffc24714}
+
+</style>
+</head>
+<body>
+<div id="welcome"><div class="col">كلية الحاسوب</div><div class="it">ركن IT<b>.</b></div><div class="ln"></div><div class="ti">XO ضد الحاسوب</div><div class="by">تعديل وتجهيز</div><div class="bt">Batch 33</div><div class="hi">مرحباً بكم في بيتكم 💻</div><button id="go">ابدأ 🚀</button></div>
+<header class="top"><div class="brand">كلية الحاسوب - ركن IT<small>XO ضد الحاسوب</small></div><button class="pill" id="sp">👤 مشرف</button></header>
+<main>
+
+<div class="card"><div class="row"><button class="b alt on" id="m1">🧠 لا يُهزم</button><button class="b alt" id="m2">🙂 مبتدئ</button></div>
+<div class="row" style="margin-top:8px"><button class="b alt on" id="f1">أبدأ أنا</button><button class="b alt" id="f2">يبدأ الحاسوب</button></div></div>
+<div id="bd"></div>
+<div class="card"><p class="msg" id="st"></p><p id="tl" style="color:#8fb0cc;font-size:13px"></p><button class="b alt" id="again" style="width:100%;margin-top:6px">🔄 جولة جديدة</button></div>
+<div class="card"><label style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" id="pk" style="width:20px;height:20px"> 👁 اكشف تفكير الحاسوب</label><p id="th" style="color:#ffe9b0"></p></div>
+
+</main>
+<div class="sup" id="sup"><button class="x" id="supx" aria-label="إغلاق">✕</button>
+<h3>دليل المشرف: XO ضد الحاسوب</h3>
+<h4>الفكرة في جملة</h4><p>الطالب يلعب XO ضد حاسوب <b>لا يُهزم</b>، ويستطيع أن يرى كيف يفكر الحاسوب: يجرّب كل الاحتمالات القادمة ثم يختار الأفضل.</p>
+<h4>كيف يفكر الحاسوب؟ (خوارزمية Minimax)</h4><ul><li>يجرّب كل خانة فارغة، ثم يتخيّل ردّك، ثم رده، حتى نهاية اللعبة.</li><li>يعطي كل نتيجة تقييماً: فوزه جيد، وخسارته سيئة، والتعادل بينهما.</li><li>يفترض أنك تلعب أفضل لعب ممكن، ثم يختار الحركة الأفضل في أسوأ الأحوال.</li></ul>
+<h4>ماذا يظهر عند "اكشف تفكير الحاسوب"؟</h4><p>على كل خانة فارغة: 😎 إن كانت تضمن له الفوز، 🤝 تعادل، 😬 خسارة. مع عدد المواقف التي حللها (غالباً بالآلاف في أول حركة).</p>
+<h4>أسئلة متوقعة</h4>
+<div class="qa"><b>هل هذا ذكاء اصطناعي؟</b>نعم، لكنه النوع الكلاسيكي: <b>بحث</b> في الاحتمالات بقواعد مكتوبة. يختلف عن الذكاء الاصطناعي الحديث الذي <b>يتعلم من البيانات</b>.</div>
+<div class="qa"><b>هل يمكن الفوز عليه؟</b>في وضع "لا يُهزم" لا. أفضل نتيجة ممكنة هي التعادل. في وضع "مبتدئ" يخطئ أحياناً عمداً فيمكن الفوز.</div>
+<div class="qa"><b>لماذا XO سهلة على الحاسوب؟</b>عدد الحالات صغير (بضعة آلاف). أما الشطرنج فعدد حالاته هائل، ويحتاج حيلاً أذكى.</div>
+<div class="qa"><b>نصيحة للتعادل؟</b>ابدأ بالمنتصف أو بزاوية، وانتبه لأي صف يوشك الحاسوب أن يكمله.</div>
+<h4>بعد أن ينتهي</h4><p>"الحاسوب ما يخمّن، بل يحسب كل الاحتمالات بسرعة. وهذه فكرة أساسية في الذكاء الاصطناعي: البحث عن أفضل قرار."</p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+$('#go').onclick=()=>{$('#welcome').classList.add('out');setTimeout(()=>$('#welcome').remove(),800)};
+$('#sp').onclick=()=>{const o=$('#sup').classList.toggle('on');$('#sp').classList.toggle('on',o)};
+$('#supx').onclick=()=>{$('#sup').classList.remove('on');$('#sp').classList.remove('on')};
+
+const WINL=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+function winner(b){for(const[a,c,d]of WINL)if(b[a]&&b[a]===b[c]&&b[a]===b[d])return b[a];return b.includes('')?null:'T'}
+let nodes=0;
+function mm(b,turn,depth){nodes++;const w=winner(b);if(w==='O')return 10-depth;if(w==='X')return depth-10;if(w==='T')return 0;
+ let best=turn==='O'?-99:99;for(let i=0;i<9;i++)if(!b[i]){b[i]=turn;const v=mm(b,turn==='O'?'X':'O',depth+1);b[i]='';best=turn==='O'?Math.max(best,v):Math.min(best,v)}return best}
+function evals(b){nodes=0;const o={};for(let i=0;i<9;i++)if(!b[i]){b[i]='O';o[i]=mm(b,'X',1);b[i]=''}return{o,nodes}}
+
+let gid=0,B=Array(9).fill(''),mode='hard',first='me',over=false,score={me:0,pc:0,dr:0},wait=false;
+const cells=[];const bd=$('#bd');for(let i=0;i<9;i++){const c=document.createElement('button');c.className='cell';c.setAttribute('aria-label','خانة '+(i+1));c.onclick=()=>play(i);bd.appendChild(c);cells.push(c)}
+function paint(hint){cells.forEach((c,i)=>{c.textContent=B[i]||(hint&&hint[i]!==undefined?(hint[i]>0?'😎':hint[i]<0?'😬':'🤝'):'');c.className='cell'+(B[i]==='X'?' x':B[i]==='O'?' o':'')+(!B[i]&&hint&&hint[i]!==undefined?' h':'')})}
+function status(t){$('#st').innerHTML=t}
+function tally(){$('#tl').textContent='أنت '+score.me+'  |  الحاسوب '+score.pc+'  |  تعادل '+score.dr}
+function finish(w){over=true;
+ if(w==='X'){score.me++;status('🎉 فزت! '+(mode==='hard'?'مستحيل... تأكد أنك لم تغش 😄':'أحسنت!'))}
+ else if(w==='O'){score.pc++;status('🤖 فاز الحاسوب. جرّب مرة ثانية!')}
+ else{score.dr++;status('🤝 تعادل! '+(mode==='hard'?'هذا أفضل نتيجة ممكنة ضد هذا الحاسوب 👏':'جيد!'))}tally();paint()}
+function play(i){if(over||wait||B[i])return;B[i]='X';paint();const w=winner(B);if(w){finish(w);return}pc()}
+function pc(){wait=true;const g=gid;status('🤖 الحاسوب يفكر...');
+ const e=evals(B),free=Object.keys(e.o).map(Number);let mv;
+ if(mode==='easy'&&Math.random()<.55)mv=free[Math.floor(Math.random()*free.length)];
+ else{const m=Math.max(...free.map(k=>e.o[k]));const bs=free.filter(k=>e.o[k]===m);mv=bs[Math.floor(Math.random()*bs.length)]}
+ const peek=$('#pk').checked;if(peek){paint(e.o);$('#th').innerHTML='حلّل الحاسوب <b>'+e.nodes.toLocaleString('ar')+'</b> موقفاً محتملاً قبل أن يختار.<br>😎 = يفوز، 🤝 = تعادل، 😬 = يخسر. فيختار الأفضل له.'}else $('#th').textContent='';
+ setTimeout(()=>{if(g!==gid)return;B[mv]='O';wait=false;paint();const w=winner(B);if(w)finish(w);else status('دورك (X) ✨')},peek?1700:500)}
+function newGame(){gid++;B=Array(9).fill('');over=false;wait=false;paint();$('#th').textContent='';if(first==='pc'){pc()}else status('دورك (X) ✨')}
+function sel(ids,id){ids.forEach(x=>$('#'+x).classList.toggle('on',x===id))}
+$('#m1').onclick=()=>{mode='hard';sel(['m1','m2'],'m1');score={me:0,pc:0,dr:0};tally();newGame()};
+$('#m2').onclick=()=>{mode='easy';sel(['m1','m2'],'m2');score={me:0,pc:0,dr:0};tally();newGame()};
+$('#f1').onclick=()=>{first='me';sel(['f1','f2'],'f1');newGame()};$('#f2').onclick=()=>{first='pc';sel(['f1','f2'],'f2');newGame()};
+$('#again').onclick=newGame;tally();newGame();
+
+</script>
+</body>
+</html>
