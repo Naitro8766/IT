@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>رحلة الرسالة - ركن IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#02040a radial-gradient(circle at 50% 0%,#0b2a5b55,transparent 60%) no-repeat;color:#fff;font-family:Cairo,Tahoma,sans-serif;min-height:100vh;touch-action:manipulation}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 16px;background:linear-gradient(#02040af0 60%,transparent)}
+.brand{font-weight:800;font-size:15px;line-height:1.3}.brand small{display:block;font-weight:600;font-size:11px;color:#7fd6ff}
+.pill{border:1px solid #ffffff30;background:#0a1424cc;color:#fff;border-radius:18px;padding:5px 12px;font:700 12px Cairo,sans-serif;cursor:pointer}.pill.on{border-color:#ffc247;color:#ffc247}
+main{max-width:640px;margin:0 auto;padding:calc(76px + env(safe-area-inset-top,0px)) 12px calc(28px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.card{border:1px solid #6fb7ff33;background:#0a1424cc;border-radius:14px;padding:12px 14px}
+.card p{margin:4px 0;font-size:14px;line-height:1.8;color:#dbe7f3}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:104px}.between{justify-content:space-between}
+.b{background:#55caff;color:#04111f;border:0;border-radius:10px;padding:11px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+.b.alt{background:none;color:#bfeaff;border:1px solid #55caff88}.b.alt.on{background:#55caff30;border-color:#55caff;color:#fff}
+.b:disabled{opacity:.4}
+.in,select{width:100%;background:#020611;border:1px solid #55caff88;color:#fff;border-radius:10px;padding:10px 12px;font:16px Cairo,sans-serif}
+.msg{min-height:26px;font-weight:700;color:#ffe9b0}
+.sup{position:fixed;left:0;right:0;bottom:0;max-height:80vh;overflow-y:auto;z-index:40;background:#071120f7;border-top:2px solid #ffc247;border-radius:18px 18px 0 0;padding:14px 16px calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .3s}
+.sup.on{transform:none}.sup h3{margin:0 0 4px;color:#ffc247}.sup h4{margin:12px 0 4px;color:#7fd6ff;font-size:14px}
+.sup p,.sup li{font-size:13.5px;line-height:1.85;color:#e2ebf5}.sup ul{padding:0 18px 0 0;margin:2px 0}
+.qa{margin:6px 0;padding:8px 10px;border-radius:10px;background:#ffffff0f}.qa b{display:block;color:#ffc247;font-size:13px}
+.x{float:left;background:none;border:1px solid #ffffff40;color:#fff;border-radius:50%;width:30px;height:30px;font-size:14px}
+#welcome{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%,#0b2a5b 0%,#050c19 60%,#02040a 100%);transition:opacity .7s,visibility .7s}
+#welcome.out{opacity:0;visibility:hidden;pointer-events:none}
+#welcome .col{font-size:15px;font-weight:600;color:#a6c8e8}
+#welcome .it{direction:ltr;font-size:60px;font-weight:800;line-height:1;text-shadow:0 0 28px #55caffaa,0 0 60px #2a80ff66}#welcome .it b{color:#58d5ff}
+#welcome .ln{width:70px;height:2px;background:linear-gradient(90deg,transparent,#55caff,transparent)}
+#welcome .ti{font-size:22px;font-weight:800;color:#bfeaff}#welcome .by{font-size:12px;color:#8fb0cc}
+#welcome .bt{direction:ltr;padding:4px 16px;border:1px solid #55caff88;border-radius:20px;background:#0a2a4a99;color:#bfeaff;font-size:16px;font-weight:800;letter-spacing:2px}
+#welcome .hi{font-size:20px;font-weight:800}
+#welcome button{margin-top:6px;padding:11px 26px;border:1px solid #5bcaff;border-radius:26px;background:#28a0dc55;color:#fff;font:700 15px Cairo,sans-serif;cursor:pointer}
+
+</style>
+</head>
+<body>
+<div id="welcome"><div class="col">كلية الحاسوب</div><div class="it">ركن IT<b>.</b></div><div class="ln"></div><div class="ti">رحلة الرسالة</div><div class="by">تعديل وتجهيز</div><div class="bt">Batch 33</div><div class="hi">مرحباً بكم في بيتكم 💻</div><button id="wgo">ابدأ 🚀</button></div>
+<header class="top"><div class="brand">كلية الحاسوب - ركن IT<small>رحلة الرسالة</small></div><button class="pill" id="sp">👤 مشرف</button></header>
+<main>
+
+<div class="card"><label for="url"><b>اكتب اسم موقع</b></label><div class="row" style="margin-top:6px"><input class="in" id="url" dir="ltr" value="example.com" autocomplete="off" autocapitalize="off" spellcheck="false" style="flex:2"><button class="b" id="start" style="flex:1">🚀 انطلق</button></div>
+<div class="row" style="margin-top:8px"><button class="b alt" data-s="example.com">example.com</button><button class="b alt" data-s="wikipedia.org">wikipedia.org</button><button class="b alt" data-s="github.com">github.com</button></div></div>
+<canvas id="cv" width="360" height="560" style="width:100%;max-width:360px;align-self:center;border-radius:14px;border:1px solid #6fb7ff33"></canvas>
+<div class="card"><b id="stt" style="color:#7fd6ff"></b><p id="exp"></p><p id="dns" style="color:#3dff86;font-size:13px"></p>
+<div class="row" style="margin-top:6px"><button class="b alt" id="prv" disabled>▶ السابق</button><button class="b" id="auto">▶ تشغيل تلقائي</button><button class="b alt" id="nxt" disabled>التالي ◀</button></div></div>
+
+</main>
+<div class="sup" id="sup"><button class="x" id="supx" aria-label="إغلاق">✕</button>
+<h3>دليل المشرف: رحلة الرسالة</h3>
+<h4>الفكرة في جملة</h4><p>الطالب يكتب اسم موقع فيشاهد خريطة متحركة لما يحدث عند فتح أي موقع: السؤال عن العنوان (DNS) ثم الطلب ثم الرد.</p>
+<h4>الخطوات السبع بتبسيط</h4><ul>
+<li><b>1:</b> الحاسوب لا يفهم الأسماء، يحتاج عنواناً رقمياً (IP).</li>
+<li><b>2 و3:</b> يسأل خادم <b>DNS</b> ("دفتر هاتف الإنترنت") فيرد بالعنوان.</li>
+<li><b>4:</b> يرسل الطلب عبر الراوتر ومزود الإنترنت إلى خادم الموقع.</li>
+<li><b>5:</b> الخادم يجهّز الصفحة.</li>
+<li><b>6:</b> الرد يعود مقطّعاً إلى حزم (Packets) وتتجمع عند الجهاز.</li>
+<li><b>7:</b> المتصفح يعرض الصفحة.</li></ul>
+<h4>مصطلحات</h4><ul><li><b>IP:</b> عنوان الجهاز في الشبكة.</li><li><b>DNS:</b> يحوّل الأسماء إلى أرقام.</li><li><b>ISP:</b> شركة الإنترنت التي تتصل بها.</li><li><b>Server:</b> حاسوب يخدم الآخرين (يحفظ الموقع).</li><li><b>Packet:</b> قطعة صغيرة من البيانات.</li></ul>
+<h4>أسئلة متوقعة</h4>
+<div class="qa"><b>هل العنوان الظاهر حقيقي؟</b>لا، هو عنوان مثال (من نطاق مخصص للأمثلة) ويُولَّد من اسم الموقع للتوضيح فقط. العنوان الحقيقي يأتي من DNS الفعلي.</div>
+<div class="qa"><b>هل هذا ما يحدث دائماً بالتفصيل؟</b>هذا تبسيط. في الواقع قد يحفظ الجهاز نتيجة DNS (ذاكرة مؤقتة)، وتمر الرسالة بقفزات كثيرة، والمواقع الحديثة تشفّر الاتصال (HTTPS).</div>
+<div class="qa"><b>لماذا تُقطَّع الصفحة إلى حزم؟</b>لأن الشبكة أسرع وأوثق بقطع صغيرة، وإن ضاعت قطعة تُعاد وحدها.</div>
+<div class="qa"><b>كيف أرى القفزات فعلاً؟</b>على حاسوب ويندوز اكتب في سطر الأوامر: <span dir="ltr">tracert example.com</span></div>
+<div class="qa"><b>ما صلة هذا بمجال الشبكات؟</b>هذه خلاصة ما يدرسه الطالب في الشبكات: العناوين والتوجيه والبروتوكولات.</div>
+<h4>بعد أن ينتهي</h4><p>"عندما تفتح أي موقع، تقوم رسالتك برحلة طويلة في أجزاء من الثانية. وفهم هذه الرحلة هو أساس مجال الشبكات."</p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+$('#wgo').onclick=()=>{$('#welcome').classList.add('out');setTimeout(()=>$('#welcome').remove(),800)};
+$('#sp').onclick=()=>{const o=$('#sup').classList.toggle('on');$('#sp').classList.toggle('on',o)};
+$('#supx').onclick=()=>{$('#sup').classList.remove('on');$('#sp').classList.remove('on')};
+
+function clean(s){s=(s||'').toLowerCase().trim().replace(/^https?:\/\//,'').replace(/^www\./,'').split(/[\/?#]/)[0].replace(/[^a-z0-9.\-]/g,'').slice(0,28);return s.includes('.')?s:(s?s+'.com':'example.com')}
+function fakeIP(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return '203.0.113.'+(1+h%254)}
+
+const cv=$('#cv'),cx=cv.getContext('2d');
+const N=[{n:'جهازك',i:'📱',x:70,y:60},{n:'الراوتر',i:'📡',x:260,y:150},{n:'مزود الإنترنت',i:'🏢',x:70,y:250},{n:'خادم DNS',i:'📖',x:260,y:340},{n:'الإنترنت',i:'🌐',x:70,y:430},{n:'خادم الموقع',i:'🖥️',x:260,y:510}];
+const E=[[0,1],[1,2],[2,3],[2,4],[4,5]];
+let site='example.com',ip=fakeIP(site),step=-1,auto=false,anim=null,timer=null;
+const S=()=>[
+ {t:'1) تكتب اسم الموقع',pulse:0,x:'كتبت <b dir="ltr">'+site+'</b> في المتصفح. لكن الحاسوب لا يفهم الأسماء، بل يحتاج <b>عنواناً رقمياً (IP)</b> ليعرف إلى أين يذهب.'},
+ {t:'2) سؤال DNS',path:[0,1,2,3],lb:'؟',x:'جهازك يسأل خادم <b>DNS</b>: "ما عنوان '+site+'؟". الرسالة تمر بالراوتر ثم مزود الإنترنت. و DNS هو <b>دفتر هاتف الإنترنت</b>: يحوّل الاسم إلى رقم.'},
+ {t:'3) رد DNS',path:[3,2,1,0],lb:ip,x:'خادم DNS يجيب: العنوان هو <b dir="ltr">'+ip+'</b>. (عنوان مثال للتوضيح). الآن يعرف جهازك أين الخادم.'},
+ {t:'4) الطلب إلى الموقع',path:[0,1,2,4,5],lb:'طلب',x:'يرسل المتصفح طلباً: "أعطني صفحتك". ينتقل عبر الراوتر ومزود الإنترنت وعدة شبكات (الإنترنت) حتى يصل إلى <b>خادم الموقع</b>.'},
+ {t:'5) الخادم يجهّز الصفحة',pulse:5,x:'الخادم حاسوب قوي يعمل على مدار الساعة. يبحث عن الصفحة ويجهّزها (ملفات HTML وصور).'},
+ {t:'6) الرد يعود على شكل حزم',path:[5,4,2,1,0],many:1,lb:'📦',x:'الصفحة لا ترسل دفعة واحدة، بل تُقطّع إلى <b>حزم صغيرة (Packets)</b> قد تسلك طرقاً مختلفة، وتتجمع عندك.'},
+ {t:'7) تظهر الصفحة',pulse:0,x:'المتصفح يجمع الحزم ويعرض الصفحة. كل هذه الرحلة تتم في <b>أجزاء من الثانية</b>! ✨'}];
+let ST=S();
+function seg(path){const pts=path.map(i=>N[i]);const L=[0];for(let k=1;k<pts.length;k++)L.push(L[k-1]+Math.hypot(pts[k].x-pts[k-1].x,pts[k].y-pts[k-1].y));return{pts,L,tot:L[L.length-1]}}
+function at(sg,f){const d=Math.max(0,Math.min(1,f))*sg.tot;let k=1;while(k<sg.L.length-1&&sg.L[k]<d)k++;const a=sg.pts[k-1],b=sg.pts[k],u=(d-sg.L[k-1])/((sg.L[k]-sg.L[k-1])||1);return{x:a.x+(b.x-a.x)*u,y:a.y+(b.y-a.y)*u}}
+function show(){const s=ST[step];$('#stt').textContent='الخطوة '+(step+1)+' من '+ST.length+': '+s.t.replace(/^\d\) /,'');$('#exp').innerHTML=s.x;
+ $('#dns').innerHTML=step>=2?'📖 دفتر DNS: <b dir="ltr">'+site+' ⇄ '+ip+'</b>':'';$('#prv').disabled=step<=0;$('#nxt').disabled=step>=ST.length-1}
+function go(i){clearTimeout(timer);step=Math.max(0,Math.min(ST.length-1,i));const s=ST[step];show();
+ anim={t0:performance.now(),sg:s.path?seg(s.path):null,dur:s.path?Math.max(1500,seg(s.path).tot*7):1600,s};}
+function done(){if(auto){if(step<ST.length-1)timer=setTimeout(()=>go(step+1),1100);else{auto=false;$('#auto').textContent='↻ إعادة التشغيل'}}}
+function draw(ts){cx.clearRect(0,0,360,560);cx.fillStyle='#06101f';cx.fillRect(0,0,360,560);
+ const act=new Set();let f=0,fin=false;if(anim){const el=ts-anim.t0;f=el/anim.dur;fin=f>=1;if(anim.s.path)anim.s.path.forEach(i=>act.add(i));if(anim.s.pulse!==undefined)act.add(anim.s.pulse)}
+ cx.lineWidth=3;E.forEach(([a,b])=>{const on=act.has(a)&&act.has(b);cx.strokeStyle=on?'#55caff':'#1b3a5c';cx.setLineDash(on?[]:[6,6]);cx.beginPath();cx.moveTo(N[a].x,N[a].y);cx.lineTo(N[b].x,N[b].y);cx.stroke()});cx.setLineDash([]);
+ N.forEach((n,i)=>{const on=act.has(i);if(on){const r=34+Math.sin(ts/220)*3;const g=cx.createRadialGradient(n.x,n.y,10,n.x,n.y,r+14);g.addColorStop(0,'#55caff66');g.addColorStop(1,'#55caff00');cx.fillStyle=g;cx.beginPath();cx.arc(n.x,n.y,r+14,0,7);cx.fill()}
+  cx.fillStyle='#0a1830';cx.strokeStyle=on?'#55caff':'#2b5078';cx.lineWidth=2;cx.beginPath();cx.arc(n.x,n.y,28,0,7);cx.fill();cx.stroke();
+  cx.font='28px sans-serif';cx.textAlign='center';cx.textBaseline='middle';cx.fillStyle='#fff';cx.fillText(n.i,n.x,n.y+2);
+  cx.font='700 13px Cairo,Tahoma,sans-serif';cx.fillStyle=on?'#bfeaff':'#8fb0cc';cx.fillText(n.n,n.x,n.y+46)});
+ if(anim&&anim.sg){const cnt=anim.s.many?4:1;for(let k=0;k<cnt;k++){const ff=Math.min(1,Math.max(0,f-k*.09));if(ff<=0||(fin&&k===cnt-1&&f>1.05))continue;const p=at(anim.sg,ff);
+   for(let t=1;t<=4;t++){const q=at(anim.sg,Math.max(0,ff-t*.025));cx.fillStyle='rgba(255,194,71,'+(.35-t*.07)+')';cx.beginPath();cx.arc(q.x,q.y,9-t,0,7);cx.fill()}
+   cx.fillStyle='#ffc247';cx.beginPath();cx.arc(p.x,p.y,10,0,7);cx.fill();
+   if(k===0){cx.font='700 12px Cairo,Tahoma,sans-serif';cx.fillStyle='#fff';cx.textBaseline='bottom';const w=cx.measureText(anim.s.lb).width+14;cx.fillStyle='#0b2a5bdd';cx.fillRect(p.x-w/2,p.y-36,w,20);cx.fillStyle='#fff';cx.textBaseline='middle';cx.fillText(anim.s.lb,p.x,p.y-26)}}}
+ if(fin&&!anim.done){anim.done=1;done()}
+ requestAnimationFrame(draw)}
+function start(){site=clean($('#url').value);$('#url').value=site;ip=fakeIP(site);ST=S();auto=true;$('#auto').textContent='⏸ إيقاف مؤقت';go(0)}
+$('#start').onclick=start;$('#url').onkeydown=e=>{if(e.key==='Enter')start()};
+$('#auto').onclick=()=>{if(step<0){start();return}if(auto){auto=false;clearTimeout(timer);$('#auto').textContent='▶ متابعة'}else{auto=true;$('#auto').textContent='⏸ إيقاف مؤقت';if(anim&&anim.done&&step>=ST.length-1)go(0);else if(anim&&anim.done)go(step+1)}};
+$('#prv').onclick=()=>{auto=false;clearTimeout(timer);$('#auto').textContent='▶ متابعة';go(step-1)};
+$('#nxt').onclick=()=>{auto=false;clearTimeout(timer);$('#auto').textContent='▶ متابعة';go(step+1)};
+document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{$('#url').value=b.dataset.s;start()});
+requestAnimationFrame(draw);$('#exp').textContent='اكتب اسم موقع واضغط انطلق لترى رحلة الرسالة من جهازك إلى الموقع وعودتها.';
+
+</script>
+</body>
+</html>
