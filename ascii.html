@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>مرآة النص - ركن IT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#02040a radial-gradient(circle at 50% 0%,#0b2a5b55,transparent 60%) no-repeat;color:#fff;font-family:Cairo,Tahoma,sans-serif;min-height:100vh;touch-action:manipulation}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 16px;background:linear-gradient(#02040af0 60%,transparent)}
+.brand{font-weight:800;font-size:15px;line-height:1.3}.brand small{display:block;font-weight:600;font-size:11px;color:#7fd6ff}
+.pill{border:1px solid #ffffff30;background:#0a1424cc;color:#fff;border-radius:18px;padding:5px 12px;font:700 12px Cairo,sans-serif;cursor:pointer}.pill.on{border-color:#ffc247;color:#ffc247}
+main{max-width:640px;margin:0 auto;padding:calc(76px + env(safe-area-inset-top,0px)) 12px calc(28px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.card{border:1px solid #6fb7ff33;background:#0a1424cc;border-radius:14px;padding:12px 14px}
+.card p{margin:4px 0;font-size:14px;line-height:1.8;color:#dbe7f3}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:104px}.between{justify-content:space-between}
+.b{background:#55caff;color:#04111f;border:0;border-radius:10px;padding:11px 14px;font:800 14px Cairo,sans-serif;cursor:pointer}
+.b.alt{background:none;color:#bfeaff;border:1px solid #55caff88}.b.alt.on{background:#55caff30;border-color:#55caff;color:#fff}
+.b:disabled{opacity:.4}
+.in,select{width:100%;background:#020611;border:1px solid #55caff88;color:#fff;border-radius:10px;padding:10px 12px;font:16px Cairo,sans-serif}
+.msg{min-height:26px;font-weight:700;color:#ffe9b0}
+.sup{position:fixed;left:0;right:0;bottom:0;max-height:80vh;overflow-y:auto;z-index:40;background:#071120f7;border-top:2px solid #ffc247;border-radius:18px 18px 0 0;padding:14px 16px calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .3s}
+.sup.on{transform:none}.sup h3{margin:0 0 4px;color:#ffc247}.sup h4{margin:12px 0 4px;color:#7fd6ff;font-size:14px}
+.sup p,.sup li{font-size:13.5px;line-height:1.85;color:#e2ebf5}.sup ul{padding:0 18px 0 0;margin:2px 0}
+.qa{margin:6px 0;padding:8px 10px;border-radius:10px;background:#ffffff0f}.qa b{display:block;color:#ffc247;font-size:13px}
+.x{float:left;background:none;border:1px solid #ffffff40;color:#fff;border-radius:50%;width:30px;height:30px;font-size:14px}
+#welcome{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%,#0b2a5b 0%,#050c19 60%,#02040a 100%);transition:opacity .7s,visibility .7s}
+#welcome.out{opacity:0;visibility:hidden;pointer-events:none}
+#welcome .col{font-size:15px;font-weight:600;color:#a6c8e8}
+#welcome .it{direction:ltr;font-size:60px;font-weight:800;line-height:1;text-shadow:0 0 28px #55caffaa,0 0 60px #2a80ff66}#welcome .it b{color:#58d5ff}
+#welcome .ln{width:70px;height:2px;background:linear-gradient(90deg,transparent,#55caff,transparent)}
+#welcome .ti{font-size:22px;font-weight:800;color:#bfeaff}#welcome .by{font-size:12px;color:#8fb0cc}
+#welcome .bt{direction:ltr;padding:4px 16px;border:1px solid #55caff88;border-radius:20px;background:#0a2a4a99;color:#bfeaff;font-size:16px;font-weight:800;letter-spacing:2px}
+#welcome .hi{font-size:20px;font-weight:800}
+#welcome button{margin-top:6px;padding:11px 26px;border:1px solid #5bcaff;border-radius:26px;background:#28a0dc55;color:#fff;font:700 15px Cairo,sans-serif;cursor:pointer}
+
+#out{align-self:center;border-radius:14px;border:1px solid #3dff8633;background:#000}
+#vid{position:fixed;left:-9999px;width:2px;height:2px;opacity:0}
+.bigc{font:800 54px "Courier New",monospace;color:#3dff86;min-width:64px;text-align:center}
+
+</style>
+</head>
+<body>
+<div id="welcome"><div class="col">كلية الحاسوب</div><div class="it">ركن IT<b>.</b></div><div class="ln"></div><div class="ti">مرآة النص</div><div class="by">تعديل وتجهيز</div><div class="bt">Batch 33</div><div class="hi">مرحباً بكم في بيتكم 💻</div><button id="wgo">ابدأ 🚀</button></div>
+<header class="top"><div class="brand">كلية الحاسوب - ركن IT<small>مرآة النص</small></div><button class="pill" id="sp">👤 مشرف</button></header>
+<main>
+
+<video id="vid" playsinline muted></video>
+<canvas id="out" width="360" height="450"></canvas>
+<div class="card"><div class="row"><button class="b" id="cam">📷 شغّل الكاميرا</button><button class="b alt" id="flip">🔄 تبديل الكاميرا</button><button class="b alt" id="snap">📸 التقاط</button></div>
+<div class="row" style="margin-top:8px"><label style="flex:1">نمط الحروف<select id="sty"><option value="classic">كلاسيكي @#*</option><option value="blocks">مربعات ░▒▓</option><option value="binary">ثنائي 0 1</option></select></label>
+<label style="flex:1">اللون<select id="clr"><option value="green">أخضر (ماتريكس)</option><option value="white">أبيض</option><option value="color">ملوّن</option></select></label></div>
+<div class="row" style="margin-top:8px"><label style="flex:2">الدقة (عدد الأعمدة)<input type="range" id="res" min="30" max="110" value="64" style="width:100%"></label><label style="flex:1;display:flex;gap:6px;align-items:center"><input type="checkbox" id="mir" checked style="width:20px;height:20px">مرآة</label></div>
+<div class="row" style="margin-top:8px"><label style="flex:1">أو اختر صورة من جهازك<input type="file" id="img" accept="image/*" class="in"></label></div>
+<p id="cst" style="font-size:13px;color:#ffe9b0">اضغط "شغّل الكاميرا" لترى نفسك بالحروف. وقبل التشغيل تظهر لك تجربة متحركة.</p></div>
+<div class="card"><b>🔍 كيف يعمل؟</b><p>الحاسوب يقسّم الصورة إلى مربعات صغيرة، ويقيس <b>سطوع</b> كل مربع، ثم يضع بدلاً منه <b>حرفاً</b>: الحرف الكثيف للمنطقة المضيئة، والخفيف للمظلمة.</p>
+<div class="row" style="align-items:center"><div style="flex:2;min-width:150px"><label for="bv" style="font-size:13px;color:#8fb0cc">حرّك السطوع:</label><input type="range" id="bv" min="0" max="100" value="50" style="width:100%"></div><div class="bigc" id="bc" style="flex:none;min-width:70px"></div></div>
+<p style="direction:ltr;text-align:left;font:15px 'Courier New',monospace;color:#9dffcb" id="rp"></p>
+<p style="font-size:12px;color:#8fb0cc">من الأغمق (يسار) إلى الأسطع (يمين). هذا التحويل يجري على كل مربع في الصورة، عدة مرات في الثانية.</p></div>
+
+</main>
+<div class="sup" id="sup"><button class="x" id="supx" aria-label="إغلاق">✕</button>
+<h3>دليل المشرف: مرآة النص</h3>
+<h4>الفكرة في جملة</h4><p>الكاميرا تتحول إلى حروف متحركة، والطالب يرى نفسه "بلغة الحاسوب". وفيها زر التقاط يحفظ صورة يشاركها.</p>
+<h4>ما الذي يتعلمه؟</h4><ul><li>الصورة مجموعة <b>بكسلات</b>، ولكل بكسل لون وسطوع رقمي.</li><li>الحاسوب يعالج هذه الأرقام ويحوّلها إلى شيء آخر (حروف) بقاعدة بسيطة.</li><li>هذه فكرة أساسية في معالجة الصور والرؤية الحاسوبية.</li></ul>
+<h4>الخصوصية (طمئن الطلاب)</h4><p>الصورة تُعالَج على الجهاز نفسه داخل المتصفح. لا تُرسل لأي خادم ولا تُحفظ. أما صورة "التقاط" فتُنزَّل على جهازه فقط إذا ضغط الزر.</p>
+<h4>أسئلة متوقعة</h4>
+<div class="qa"><b>لا تعمل الكاميرا؟</b>تأكد من الضغط على "السماح" عند طلب الإذن. وإن كان رفض سابقاً، يفعّل الإذن من إعدادات الموقع في المتصفح (أيقونة القفل بجانب الرابط). وتعمل على الروابط الآمنة (https) فقط.</div>
+<div class="qa"><b>لماذا الصورة معكوسة؟</b>خيار "مرآة" يعكسها كما في المرآة. أطفئه إن أردت الصورة كما تراها الكاميرا.</div>
+<div class="qa"><b>ماذا تعني "الدقة"؟</b>عدد الحروف في كل صف. كلما زادت صارت الصورة أوضح وأثقل على الجهاز.</div>
+<div class="qa"><b>لماذا الصورة المتحركة قبل تشغيل الكاميرا؟</b>تجربة تعمل بلا كاميرا. ويمكن اختيار صورة من الجهاز أيضاً.</div>
+<div class="qa"><b>ما صلته بالذكاء الاصطناعي؟</b>معالجة الصور أساس الرؤية الحاسوبية (التعرف على الوجوه والأشياء)، ولكنه هنا تحويل بسيط وليس تعلّماً.</div>
+<h4>بعد أن ينتهي</h4><p>"الحاسوب رأى وجهك كأرقام (سطوع كل نقطة)، وحوّلها لحروف. وكل تطبيق صور أو فلاتر يعمل بنفس الفكرة بتفاصيل أعقد."</p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+$('#wgo').onclick=()=>{$('#welcome').classList.add('out');setTimeout(()=>$('#welcome').remove(),800)};
+$('#sp').onclick=()=>{const o=$('#sup').classList.toggle('on');$('#sp').classList.toggle('on',o)};
+$('#supx').onclick=()=>{$('#sup').classList.remove('on');$('#sp').classList.remove('on')};
+
+const RAMPS={classic:' .:-=+*#%@',blocks:' ░▒▓█',binary:' .01'};
+function charFor(l,ramp,contrast){l=Math.max(0,Math.min(1,(l-.5)*contrast+.5));return ramp[Math.min(ramp.length-1,Math.floor(l*ramp.length))]}
+const luma=(r,g,b)=>(0.299*r+0.587*g+0.114*b)/255;
+
+const out=$('#out'),ox=out.getContext('2d'),sc=document.createElement('canvas'),sx=sc.getContext('2d',{willReadFrequently:true}),vid=$('#vid');
+let W=360,Hh=450,src='demo',stream=null,facing='user',img=null,last=0,snapReq=0;
+function size(){W=Math.min(innerWidth-24,520);Hh=Math.round(W*1.25);out.width=W;out.height=Hh;out.style.width=W+'px';out.style.height=Hh+'px'}
+function drawSource(c,rows){const cx0=sx;sc.width=c;sc.height=rows;cx0.save();cx0.fillStyle='#000';cx0.fillRect(0,0,c,rows);
+ const mir=$('#mir').checked&&src==='cam';if(mir){cx0.translate(c,0);cx0.scale(-1,1)}
+ let el=null,sw=0,sh=0;
+ if(src==='cam'&&vid.videoWidth){el=vid;sw=vid.videoWidth;sh=vid.videoHeight}else if(src==='img'&&img){el=img;sw=img.naturalWidth;sh=img.naturalHeight}
+ if(el){const ta=c/rows,sa=sw/sh;let w=sw,h=sh,x=0,y=0;if(sa>ta){w=sh*ta;x=(sw-w)/2}else{h=sw/ta;y=(sh-h)/2}cx0.drawImage(el,x,y,w,h,0,0,c,rows)}
+ else{const t=performance.now()/1000;for(let i=0;i<5;i++){const px=c*(.5+.38*Math.sin(t*(.6+i*.23)+i)),py=rows*(.5+.38*Math.cos(t*(.5+i*.19)+i*2)),r=Math.min(c,rows)*(.14+.06*i%3);const g=cx0.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'#fff');g.addColorStop(1,'#0000');cx0.fillStyle=g;cx0.beginPath();cx0.arc(px,py,r,0,7);cx0.fill()}}
+ cx0.restore()}
+function frame(ts){requestAnimationFrame(frame);if(ts-last<70)return;last=ts;
+ const cols=+$('#res').value,cw=W/cols,chh=cw*1.9,rows=Math.floor(Hh/chh),ramp=RAMPS[$('#sty').value],col=$('#clr').value;
+ drawSource(cols,rows);const d=sx.getImageData(0,0,cols,rows).data;
+ ox.fillStyle='#000';ox.fillRect(0,0,W,Hh);ox.font=Math.floor(chh*.95)+'px "Courier New",monospace';ox.textAlign='center';ox.textBaseline='middle';
+ if(col!=='color')ox.fillStyle=col==='green'?'#3dff86':'#ffffff';
+ for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const i=(y*cols+x)*4,r=d[i],g=d[i+1],b=d[i+2],ch=charFor(luma(r,g,b),ramp,1.3);if(ch===' ')continue;
+  if(col==='color')ox.fillStyle='rgb('+Math.min(255,r*1.3)+','+Math.min(255,g*1.3)+','+Math.min(255,b*1.3)+')';ox.fillText(ch,x*cw+cw/2,y*chh+chh/2)}}
+async function startCam(){try{if(stream)stream.getTracks().forEach(t=>t.stop());
+ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:facing,width:{ideal:640},height:{ideal:480}},audio:false});
+ vid.srcObject=stream;await vid.play();src='cam';$('#mir').checked=facing==='user';$('#cst').textContent='✅ الكاميرا تعمل. الصورة تُعالَج على جهازك فقط ولا تُرسل ولا تُحفظ.'}
+ catch(e){src='demo';$('#cst').textContent='⚠️ تعذّر تشغيل الكاميرا (ربما رفضت الإذن أو الجهاز بلا كاميرا). نعرض لك تجربة متحركة، أو اختر صورة من جهازك.'}}
+$('#cam').onclick=startCam;
+$('#flip').onclick=()=>{facing=facing==='user'?'environment':'user';startCam()};
+$('#img').onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.onload=()=>{img=im;src='img';$('#mir').checked=false;$('#cst').textContent='🖼 تعرض الصورة المختارة بالحروف.'};im.src=URL.createObjectURL(f)};
+$('#snap').onclick=()=>{out.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='ascii-art.png';a.click()})};
+const bv=$('#bv');function bchar(){const r=RAMPS[$('#sty').value];$('#bc').textContent=charFor(bv.value/100,r,1)==' '?'␣':charFor(bv.value/100,r,1);$('#rp').textContent=r.replace(/ /,'␣')}
+bv.oninput=bchar;$('#sty').onchange=bchar;bchar();
+size();addEventListener('resize',size);requestAnimationFrame(frame);
+
+</script>
+</body>
+</html>
